@@ -35,22 +35,22 @@ class ChartsController < ApplicationController
     @textconditions_options = []
 
     unless get_conditions_options.empty?
-      @conditions_options = RedmineCharts::ConditionsUtils.to_options(@project, get_conditions_options)
-      @textconditions_options = @conditions_options.select { |c1,c2| c2.nil? }
-      @conditions_options = @conditions_options.select { |c1,c2| not c2.nil? }
+      @conditions_options     = RedmineCharts::ConditionsUtils.to_options(get_conditions_options)
+      @textconditions_options = @conditions_options.select { |c1,c2| c2.nil? }.to_a
+      @conditions_options     = @conditions_options.select { |c1,c2| not c2.nil? }.to_a
     else
       @conditions_options = Hash.new
     end
 
     unless get_multiconditions_options.empty?
-      @multiconditions_options = RedmineCharts::ConditionsUtils.to_options(@project, get_multiconditions_options)
-      @textconditions_options = @multiconditions_options.select { |c1,c2| c2.nil? }
-      @multiconditions_options = @multiconditions_options.select { |c1,c2| not c2.nil? }
+      @multiconditions_options = RedmineCharts::ConditionsUtils.to_options(get_multiconditions_options)
+      @textconditions_options  = @multiconditions_options.select { |c1,c2| c2.nil? }.to_a
+      @multiconditions_options = @multiconditions_options.select { |c1,c2| not c2.nil? }.to_a
     else
       @multiconditions_options = Hash.new
     end
 
-    @all_conditions_options = @conditions_options.merge(@multiconditions_options).merge(@textconditions_options)
+    @all_conditions_options = @conditions_options + @multiconditions_options + @textconditions_options
 
     unless get_help.blank?
       @help = get_help
@@ -59,9 +59,9 @@ class ChartsController < ApplicationController
       @help = nil
     end
 
-    @range = RedmineCharts::RangeUtils.from_params(params)
+    @range      = RedmineCharts::RangeUtils.from_params(params)
     @pagination = RedmineCharts::PaginationUtils.from_params(params)
-    @grouping = RedmineCharts::GroupingUtils.from_params(get_grouping_options, params)
+    @grouping   = RedmineCharts::GroupingUtils.from_params(get_grouping_options, params)
     @conditions = RedmineCharts::ConditionsUtils.from_params(get_conditions_options + get_multiconditions_options, @project.id, params)
 
     if params[:chart_form_action] == 'saved_condition_update'
@@ -221,7 +221,7 @@ class ChartsController < ApplicationController
   def show_pages
     false
   end
-  
+
   # Returns values for grouping options
   def get_grouping_options
     []
