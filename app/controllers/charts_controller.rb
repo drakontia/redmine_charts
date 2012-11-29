@@ -29,25 +29,25 @@ class ChartsController < ApplicationController
     unless get_grouping_options.empty?
       @grouping_options = RedmineCharts::GroupingUtils.to_options(get_grouping_options)
     else
-      @grouping_options = Hash.new
+      @grouping_options = []
     end
 
     @textconditions_options = []
 
     unless get_conditions_options.empty?
-      @conditions_options     = RedmineCharts::ConditionsUtils.to_options(get_conditions_options)
+      @conditions_options     = RedmineCharts::ConditionsUtils.to_options(@project, get_conditions_options)
       @textconditions_options = @conditions_options.select { |c1,c2| c2.nil? }.to_a
       @conditions_options     = @conditions_options.select { |c1,c2| not c2.nil? }.to_a
     else
-      @conditions_options = Hash.new
+      @conditions_options = []
     end
 
     unless get_multiconditions_options.empty?
-      @multiconditions_options = RedmineCharts::ConditionsUtils.to_options(get_multiconditions_options)
+      @multiconditions_options = RedmineCharts::ConditionsUtils.to_options(@project, get_multiconditions_options)
       @textconditions_options  = @multiconditions_options.select { |c1,c2| c2.nil? }.to_a
       @multiconditions_options = @multiconditions_options.select { |c1,c2| not c2.nil? }.to_a
     else
-      @multiconditions_options = Hash.new
+      @multiconditions_options = []
     end
 
     @all_conditions_options = @conditions_options + @multiconditions_options + @textconditions_options
