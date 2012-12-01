@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "redmine_charts"
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Maciej Szczytowski"]
-  s.date = "2012-11-14"
+  s.date = "2012-12-01"
   s.description = "Plugin for Redmine which integrates some nice project charts."
   s.email = "mszczytowski@gmail.com"
   s.extra_rdoc_files = [
