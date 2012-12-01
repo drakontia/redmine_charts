@@ -53,17 +53,20 @@ Thanks for the contribution.
 
 ## Changelog
 
-## 0.1.4
+### 0.1.5
+- compatible with Ruby 1.8.7
+
+### 0.1.4
 - compatible with Redmine 1.4.x and Ruby 1.9.x (not support Ruby 1.8.7 )
 - fix about bugs on charts_deviations.
-	
-## 0.1.3
+
+### 0.1.3
 - Corresponding to sub-projects.
 
-## 0.1.2
+### 0.1.2
 - Fix of error & notice message is also displayed on the next screen.
 
-## 0.1.1
+### 0.1.1
 - compatible with Redmine 1.1.2
 - Only list active projects, fix from Anton Kravchenko's fork.
 - weeks starts from 0 - yondo
