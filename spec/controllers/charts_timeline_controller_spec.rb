@@ -131,37 +131,37 @@ describe ChartsTimelineController do
 
     body = ActiveSupport::JSON.decode(assigns[:data])
     body['elements'].size.should == 1
-    body['y_axis']['max'].should be_close(9, 1)
+    body['y_axis']['max'].should be_within( 1).of(9)
     body['y_legend']['text'].should == l(:charts_timeline_y)
 
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(7.4, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(7.4)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(7.4, 2, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -170,31 +170,31 @@ describe ChartsTimelineController do
     response.should be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'][0]['value'].should be_close(14.9, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(14.9)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 14.9 : 15.0
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 3, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(7.4, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(7.4)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(7.4, 2, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -207,25 +207,25 @@ describe ChartsTimelineController do
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == 'John Smith'
 
-    body['elements'][1]['values'][0]['value'].should be_close(3.3, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(3.3)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'Dave Lopper'
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
 
     body['elements'][2]['values'].size.should == 4
     body['elements'][2]['text'].should == 'Redmine Admin'
 
-    body['elements'][2]['values'][0]['value'].should be_close(3.3, 0.1)
+    body['elements'][2]['values'][0]['value'].should be_within( 0.1).of(3.3)
     body['elements'][2]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][2]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][2]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][2]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
   end
 
@@ -238,17 +238,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'High'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -261,17 +261,17 @@ describe ChartsTimelineController do
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should ==  l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
 
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'Redmine Admin'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
   end
 
@@ -284,9 +284,9 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == '#15041 Project1'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(7.4, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(7.4)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(7.4, 2, '10 Mar 10')
   end
 
@@ -299,17 +299,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'New'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -322,17 +322,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'Bug'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -345,17 +345,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == '#15045 Issue5'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -368,17 +368,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == '2.0'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -391,17 +391,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'Category2'
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == l(:charts_group_none)
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -414,17 +414,17 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 4
     body['elements'][0]['text'].should == 'Design'
 
-    body['elements'][0]['values'][0]['value'].should be_close(3.3, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(3.3)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
 
     body['elements'][1]['values'].size.should == 4
     body['elements'][1]['text'].should == 'Development'
 
-    body['elements'][1]['values'][0]['value'].should be_close(3.3, 0.1)
+    body['elements'][1]['values'][0]['value'].should be_within( 0.1).of(3.3)
     body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
+    body['elements'][1]['values'][1]['value'].should be_within( 0.1).of(5.1)
     body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
   end
 
@@ -435,28 +435,28 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(4.3, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(4.3)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 4.3 : 4.4
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 1, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(3.3, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(3.3)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -467,25 +467,25 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")    .should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -498,28 +498,28 @@ describe ChartsTimelineController do
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 4.3 : 4.4
 
-    body['elements'][0]['values'][0]['value'].should be_close(4.3, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(4.3)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 1, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(3.3, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(3.3)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(5.1, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(5.1)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -530,28 +530,28 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -562,25 +562,25 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -591,28 +591,28 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -623,31 +623,31 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(6.6)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -659,31 +659,31 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -694,28 +694,28 @@ describe ChartsTimelineController do
     body['elements'][0]['values'].size.should == 10
     body['elements'][0]['text'].should == l(:charts_group_all)
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][0]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][1]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
+    body['elements'][0]['values'][2]['value'].should be_within( 0.1).of(2.3)
     body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    body['elements'][0]['values'][3]['value'].should be_within( 0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
     body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][4]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][5]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][6]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][7]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][8]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
+    body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(0)
     body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
   end
 
@@ -727,7 +727,7 @@ describe ChartsTimelineController do
       body['elements'][0]['values'].size.should == 10
       body['elements'][0]['text'].should == l(:charts_group_all)
 
-      body['elements'][0]['values'][9]['value'].should be_close(13.2, 0.1)
+      body['elements'][0]['values'][9]['value'].should be_within( 0.1).of(13.2)
       body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(13.2, 4, '8 - 14 Mar 10')
     end
   end
