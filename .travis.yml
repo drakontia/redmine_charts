@@ -9,8 +9,8 @@ rvm:
 env:
   - REDMINE_VER=2.2.4 DB=mysql
   - REDMINE_VER=2.2.4 DB=postgresql
-  - REDMINE_VER=2.3.0 DB=mysql
-  - REDMINE_VER=2.3.0 DB=postgresql
+  - REDMINE_VER=2.3.3 DB=mysql
+  - REDMINE_VER=2.3.3 DB=postgresql
 matrix:
   allow_failures:
     - rvm: jruby-19mode
