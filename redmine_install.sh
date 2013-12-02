@@ -56,9 +56,8 @@ export BUNDLE_GEMFILE=$PATH_TO_REDMINE/Gemfile
 clone_redmine()
 {
   set -e # exit if clone fails
-  git clone -b master --depth=100 --quiet $REDMINE_GIT_REPO $PATH_TO_REDMINE
+  git clone -b $REDMINE_GIT_TAG --depth=100 --quiet $REDMINE_GIT_REPO $PATH_TO_REDMINE
   cd $PATH_TO_REDMINE
-  git fetch origin refs/tags/$REDMINE_GIT_TAG
   git checkout $REDMINE_GIT_TAG
 }
 
