@@ -3,22 +3,23 @@ branches:
     - master
     - develop
 language: ruby
+bundler_args: --without development
 rvm:
   - 1.9.3
   - 2.0.0
 env:
-  - REDMINE_VER=2.2.4 DB=mysql
-  - REDMINE_VER=2.2.4 DB=postgresql
   - REDMINE_VER=2.3.3 DB=mysql
   - REDMINE_VER=2.3.3 DB=postgresql
+  - REDMINE_VER=master DB=mysql
+  - REDMINE_VER=master DB=postgresql
 matrix:
   allow_failures:
     - rvm: jruby-19mode
   exclude: # anyone is free to adopt a build, until then, no builds that don't have a maintainer
     - rvm: 2.0.0
-      env: REDMINE_VER=2.2.4 DB=mysql
+      env: REDMINE_VER=master DB=mysql
     - rvm: 2.0.0
-      env: REDMINE_VER=2.2.4 DB=postgresql
+      env: REDMINE_VER=master DB=postgresql
 
 install: "echo skip bundle install"
 before_script:
