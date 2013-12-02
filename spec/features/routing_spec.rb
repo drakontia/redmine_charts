@@ -9,32 +9,51 @@ describe "Routing", :type => :controller do
 
   it "should routes to burndown" do
     @controller = ChartsBurndownController.new
-    get("/projects/Project1/charts/burndown/index").should route_to("charts_burndown#index")
+    expect(:get => "/projects/Project1/charts/burndown").to route_to(
+      :controller => "charts_burndown",
+      :action => "index"
+    )
   end
 
   it "should routes to burndown2" do
     @controller = ChartsBurndown2Controller.new
-    get("/projects/Project1/charts/burndown2/index").should route_to("charts_burndown2#index")
+    expect(:get => "/projects/Project1/charts/burndown2").to route_to(
+      :controller => "charts_burndown2",
+      :action => "index"
+    )
   end
 
   it "should routes to ratio" do
     @controller = ChartsRatioController.new
-    get("/projects/Project1/charts/ratio/index").should route_to("charts_ratio#index")
+    expect(:get => "/projects/Project1/charts/ratio").to route_to(
+      :controller => "charts_ratio",
+      :action => "index"
+    )
   end
 
   it "should routes to timeline" do
     @controller = ChartsTimelineController.new
-    get("/projects/Project1/charts/timeline/index").should route_to("charts_timeline#index")
+    expect(:get => "/projects/Project1/charts/timeline").to route_to(
+      :controller => "charts_timeline",
+      :action => "index"
+    )
   end
 
   it "should routes to deviation" do
     @controller = ChartsDeviationController.new
-    get("/projects/Project1/charts/deviation/index").should route_to("charts_deviation#index")
+    expect(:get => "/projects/Project1/charts/deviation").to route_to(
+      :controller => "charts_deviation",
+      :action => "index"
+    )
   end
 
   it "should routes to Issue" do
     @controller = ChartsIssueController.new
     get("/projects/Project1/charts/issue/index").should route_to("charts_issue#index")
+    expect(:get => "/projects/Project1/charts/issue").to route_to(
+      :controller => "charts_issue",
+      :action => "index"
+    )
   end
 
 end
