@@ -5,6 +5,11 @@ describe "Routing", :type => :controller do
   before(:all) do
     @request = ActionController::TestRequest.new
     @request.session[:user_id] = 1
+
+    def routes=(routes)
+      @routes = Rails.application.routes
+      assertion_instance.instance_variable_set(:@routes, @routes)
+    end
   end
 
   it "should routes to burndown" do
