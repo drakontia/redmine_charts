@@ -102,9 +102,9 @@ cp $PATH_TO_INSTALL/$NAME_OF_PLUGIN/Gemfile.local $PATH_TO_REDMINE/
 mkdir -p vendor/bundle
 bundle install --path vendor/bundle
 
-git clone git://github.com/pullmonkey/open_flash_chart.git $PATH_TO_INSTALL/open_flash_chart
-mkdir -p public/plugin_assets/open_flash_chart
-cp -r $PATH_TO_INSTALL/open_flash_chart/assets/* public/plugin_assets/open_flash_chart/
+git clone git://github.com/drakontia/redmine_open_flash_chart.git $PATH_TO_INSTALL/redmine_open_flash_chart
+#mkdir -p public/plugin_assets/open_flash_chart
+#cp -r $PATH_TO_INSTALL/open_flash_chart/assets/* public/plugin_assets/open_flash_chart/
 
 # run redmine database migrations
 bundle exec rake db:migrate

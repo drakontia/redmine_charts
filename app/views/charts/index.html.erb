@@ -1,7 +1,7 @@
 <% html_title(l(:charts_menu_label)) -%>
 
 <% content_for :header_tags do %>
-  <%= javascript_include_tag('swfobject.js',:plugin=>'open_flash_chart') %>
+  <%= javascript_include_tag('swfobject.js',:plugin=>'redmine_open_flash_chart') %>
   <%= javascript_include_tag('charts.js', :plugin=>'redmine_charts') %>
 <% end %>
 
@@ -10,7 +10,7 @@
   <%= show_charts_menu.html_safe %>
 
   <% unless @saved_conditions.empty? %>
-    <h3><%= l(:charts_saved_conditions_label) %></h3>    
+    <h3><%= l(:charts_saved_conditions_label) %></h3>
     <% @saved_conditions.each do |saved_condition| %>
       <%= link_to(saved_condition.name, "#{url_for(:controller => "charts_#{saved_condition.chart}".to_sym, :project_id => @project)}?#{saved_condition.conditions}&saved_condition_id=#{saved_condition.id}") %><br/>
     <% end %>
@@ -18,7 +18,7 @@
 <% end %>
 
 <div class="contextual">
-  <% if @saved_condition && User.current.allowed_to?(:save_charts, @project, :global => true) %>    
+  <% if @saved_condition && User.current.allowed_to?(:save_charts, @project, :global => true) %>
 	<%= link_to l(:button_delete_condition), {:action => 'destroy_saved_condition', :project_id => @project, :id => @saved_condition.id}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
   <% end %>
 </div>
@@ -30,7 +30,7 @@
   <%= hidden_field_tag :page, @page %>
   <%= hidden_field_tag :project_id, @project.id %>
   <%= hidden_field_tag :saved_condition_id, @saved_condition ? @saved_condition.id : nil %>
-  <%= hidden_field_tag :chart_form_action, "", :id => "chart_form_action" %>  
+  <%= hidden_field_tag :chart_form_action, "", :id => "chart_form_action" %>
 
   <div id="query_form_content">
 

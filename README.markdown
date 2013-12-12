@@ -22,9 +22,7 @@ Download the sources and put them to your Plugins folder.
 Install OpenFlashChart plugin.
 
     #for Redmine 2.x
-    $ rails g plugin git://github.com/pullmonkey/open_flash_chart.git
-    mkdir -p public/plugin\_assets/open\_flash\_chart
-    cp -r plugins/open\_flash\_chart/assets/* public/plugin\_assets/open_flash_chart/
+    $ git clone git://github.com/drakontia/redmine_open_flash_chart.git plugins/redmine_open_flash_chart
 
     #for Redmine 1.4.x
     $ ./script/plugin install git://github.com/pullmonkey/open_flash_chart.git
@@ -82,8 +80,11 @@ Thanks for the contribution.
 
 ## Changelog
 
+### 0.2.2
+- exchange from directory to plugin on open flash chart
+
 ### 0.2.1
-- copatible with Redmine 2.1.x (alminium)
+- compatible with Redmine 2.1.x (alminium)
 
 ### 0.2.0
 - compatible with Redmine 2.0.x

@@ -7,7 +7,7 @@ module ChartsHelper
   # Shows chart plugin menu.
   def show_charts_menu
     res = ""
-    RedmineCharts::Utils.controllers_for_routing do |name, controller_name|      
+    RedmineCharts::Utils.controllers_for_routing do |name, controller_name|
       link_name = l("charts_link_#{name}".to_sym)
 
       if controller.controller_name == controller_name
@@ -22,14 +22,14 @@ module ChartsHelper
   # Shows chart flash setting path to data.
   def show_graph(data)
     div_name = 'flash_content_leRRmNzK'
-    relative_url_path = ActionController::Base.respond_to?(:relative_url_root) ?     ActionController::Base.relative_url_root : ActionController::AbstractRequest.relative_url_root
-    
+    relative_url_path = ActionController::Base.respond_to?(:relative_url_root) ? ActionController::Base.relative_url_root : ActionController::AbstractRequest.relative_url_root
+
     html = "<div id=\"#{div_name}\"></div>"
     html << '<script type="text/javascript">' << "\n"
     html << "function open_flash_chart_inline_data() {\n"
-    html << "return '#{data.gsub("'","\\\\'").gsub("\"","\\\\\"")}';\n"     
+    html << "return '#{data.gsub("'","\\\\'").gsub("\"","\\\\\"")}';\n"
     html << "};\n"
-    html << "swfobject.embedSWF('#{relative_url_path}/plugin_assets/open_flash_chart/open-flash-chart.swf', '#{div_name}', '100%', '400', '9.0.0', 'expressInstall.swf', {'get-data':'open_flash_chart_inline_data'});"
+    html << "swfobject.embedSWF('#{relative_url_path}/plugin_assets/redmine_open_flash_chart/open-flash-chart.swf', '#{div_name}', '100%', '400', '9.0.0', 'expressInstall.swf', {'get-data':'open_flash_chart_inline_data'});"
     html << "\nvar charts_to_image_title = '#{h(controller.controller_name)}';\n"
     html << "var charts_to_image_id = '#{div_name}';\n"
     html << '</script>'
