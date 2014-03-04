@@ -8,8 +8,7 @@ describe "Routing", :type => :controller do
   end
 
   it "should routes to burndown" do
-    @controller = ChartsBurndownController.new
-    expect(:get => "/projects/charts_project1/charts/burndown").to route_to(
+    expect(:get => "/projects/charts_project1/charts/burndown/index").to route_to(
       :project_id => 15041,
       :controller => "charts_burndown",
       :action => "index"
@@ -17,8 +16,7 @@ describe "Routing", :type => :controller do
   end
 
   it "should routes to burndown2" do
-    @controller = ChartsBurndown2Controller.new
-    expect(:get => "/projects/charts_project1/charts/burndown2").to route_to(
+    expect(:get => "/projects/charts_project1/charts/burndown2/index").to route_to(
       :project_id => 15041,
       :controller => "charts_burndown2",
       :action => "index"
@@ -26,8 +24,7 @@ describe "Routing", :type => :controller do
   end
 
   it "should routes to ratio" do
-    @controller = ChartsRatioController.new
-    expect(:get => "/projects/charts_project1/charts/ratio").to route_to(
+    expect(:get => "/projects/charts_project1/charts/ratio/index").to route_to(
       :project_id => 15041,
       :controller => "charts_ratio",
       :action => "index"
@@ -35,8 +32,7 @@ describe "Routing", :type => :controller do
   end
 
   it "should routes to timeline" do
-    @controller = ChartsTimelineController.new
-    expect(:get => "/projects/charts_project1/charts/timeline").to route_to(
+    expect(:get => "/projects/charts_project1/charts/timeline/index").to route_to(
       :project_id => 15041,
       :controller => "charts_timeline",
       :action => "index"
@@ -44,8 +40,7 @@ describe "Routing", :type => :controller do
   end
 
   it "should routes to deviation" do
-    @controller = ChartsDeviationController.new
-    expect(:get => "/projects/charts_project1/charts/deviation").to route_to(
+    expect(:get => "/projects/charts_project1/charts/deviation/index").to route_to(
       :project_id => 15041,
       :controller => "charts_deviation",
       :action => "index"
@@ -53,8 +48,7 @@ describe "Routing", :type => :controller do
   end
 
   it "should routes to Issue" do
-    @controller = ChartsIssueController.new
-    expect(:get => "/projects/charts_project1/charts/issue").to route_to(
+    expect(:get => "/projects/charts_project1/charts/issue/index").to route_to(
       :project_id => 15041,
       :controller => "charts_issue",
       :action => "index"
