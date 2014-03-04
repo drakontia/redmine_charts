@@ -4,12 +4,12 @@ module RedmineCharts
     include Redmine::I18n
 
     def self.convert(chart, data)
-      tooltip = OpenFlashChart::Tooltip.new
-      tooltip.set_hover()
+      tooltip = OFC2::Tooltip.new
+      tooltip.hover
 
-      chart.set_tooltip(tooltip)
+      chart.tooltip = tooltip
 
-      bar = OpenFlashChart::BarStack.new
+      bar = OFC2::BarStack.new
       bar.colours = RedmineCharts::Utils.colors
 
       keys = []
@@ -19,32 +19,32 @@ module RedmineCharts
         set[1].each_with_index do |v,j|
           values[j] ||= []
           values[j][i] = if v.is_a? Array
-            d = OpenFlashChart::BarStackValue.new(v[0], RedmineCharts::Utils.color(i))
-            d.set_tooltip(v[1]) unless v[1].nil?
+            d = OFC2::BarStackValue.new(:value => v[0], :colour => RedmineCharts::Utils.color(i))
+            d.tip = v[1] unless v[1].nil?
             d
           else
             v
           end
         end
-        keys << {:colour => RedmineCharts::Utils.color(i), :text => set[0], :"font-size" => 10}
+        keys << OFC2::BarStackKey.new(:colour => RedmineCharts::Utils.color(i), :text => set[0], :font-size => 10)
       end
 
-      keys << {:colour => '#000000', :text => l(:charts_deviation_group_estimated), :"font-size" => 10}
+      keys << OFC2::BarStackKey.new(:colour => '#000000', :text => l(:charts_deviation_group_estimated), :font-size => 10)
 
       bar.values = values
-      bar.set_keys(keys)
+      bar.set_keys keys
 
-      chart.add_element(bar)
+      chart << bar
 
       if data[:horizontal_line]
-        shape = OpenFlashChart::Shape.new('#000000')
+        shape = OFC2::Shape.new(:colour => '#000000')
         shape.values = [
-          OpenFlashChart::ShapePoint.new(-0.45, data[:horizontal_line]),
-          OpenFlashChart::ShapePoint.new(-0.55 + values.size, data[:horizontal_line]),
-          OpenFlashChart::ShapePoint.new(-0.55 + values.size, data[:horizontal_line] + 1),
-          OpenFlashChart::ShapePoint.new(-0.45, data[:horizontal_line] + 1),
+          OFC2::ShapePoint.new(:x => -0.45, :y => data[:horizontal_line]),
+          OFC2::ShapePoint.new(:x => -0.55 + values.size, :y => data[:horizontal_line]),
+          OFC2::ShapePoint.new(:x => -0.55 + values.size, :y => data[:horizontal_line] + 1),
+          OFC2::ShapePoint.new(:x => -0.45, :y => data[:horizontal_line] + 1),
         ]
-        chart.add_element(shape)
+        chart << shape
       end
     end
 

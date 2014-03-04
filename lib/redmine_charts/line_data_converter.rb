@@ -7,7 +7,7 @@ module RedmineCharts
       index = 0
 
       data[:sets].each do |set|
-        line = OpenFlashChart::Line.new
+        line = OFC2::Line.new
         line.text = set[0]
         line.width = 2
         line.colour = RedmineCharts::Utils.color(index)
@@ -15,25 +15,24 @@ module RedmineCharts
 
         j = -1
 
-        vals = set[1].collect do |v|
+        #vals = set[1].collect do |v|
+        set[1].collect do |v|
           j += 1
           if v.is_a? Array
-            d = OpenFlashChart::Base.new
-            d.set_value(v[0])
+            line.values = (v[0])
             if v[2]
-              d.dot_size = 4
+              line.dot_size = 4
             end
-            d.set_colour(RedmineCharts::Utils.color(index))
-            d.set_tooltip("#{v[1]}<br>#{data[:labels][j]}") unless v[1].nil?
-            d
+            line.colour = RedmineCharts::Utils.color(index)
+            line.tip = "#{v[1]}<br>#{data[:labels][j]}" unless v[1].nil?
           else
-            v
+            line.values = v
           end
         end
 
-        line.values = vals
+        #line.values = vals
 
-        chart.add_element(line)
+        chart << line
         index += 1
       end
     end

@@ -77,6 +77,7 @@ class ChartsController < ApplicationController
     @saved_conditions = ChartSavedCondition.all(:conditions => ["project_id is null or project_id = ?", @project.id])
 
     create_chart
+    @graph = ofc2('100%', 400, 'create_chart')
 
     if @error and not flash[:error]
       flash.now[:error] = l(@error)
@@ -102,7 +103,7 @@ class ChartsController < ApplicationController
 
   # Return data for chart
   def create_chart
-    chart = OpenFlashChart.new
+    chart = OFC2::Graph.new
 
     data = get_data
 
@@ -113,16 +114,14 @@ class ChartsController < ApplicationController
       get_converter.convert(chart, data)
 
       if get_y_legend
-        y = YAxis.new
-        y.set_range(0,(data[:max]*1.2).round,(data[:max]/get_y_axis_labels).round) if data[:max]
+        y = OFC2::YAxis.new(:min => 0, :max => (data[:max]*1.2).round, :steps => (data[:max]/get_y_axis_labels).round) if data[:max]
         chart.y_axis = y
       end
 
       if get_x_legend
-        x = XAxis.new
-        x.set_range(0,data[:count] > 1 ? data[:count] - 1 : 1,1) if data[:count]
+        x = OFC2::XAxis.new(:min => 0, :max => (data[:count] > 1 ? data[:count] - 1 : 1), :steps => 1) if data[:count]
         if data[:labels]
-          labels = []
+          x_labels = []
           if get_x_axis_labels > 0
             step = (data[:labels].size/get_x_axis_labels).to_i
             step = 1 if step == 0
@@ -131,35 +130,35 @@ class ChartsController < ApplicationController
           end
           data[:labels].each_with_index do |l,i|
             if i % step == 0
-              labels << l
+              x_labels << l
             else
-              labels << ""
+              x_labels << ""
             end
           end
-          x.set_labels(labels)
+          x.labels = x_labels
         end
         chart.x_axis = x
       else
-        x = XAxis.new
-        x.set_labels([""])
+        x = OFC2::XAxis.new
+        x.labels = [""]
         chart.x_axis = x
       end
 
       unless get_x_legend.nil?
-        legend = XLegend.new(get_x_legend)
-        legend.set_style('{font-size: 12px}')
-        chart.set_x_legend(legend)
+        x_legend = OFC2::XLegend.new(:text => get_x_legend)
+        x_legend.style = '{font-size: 12px}'
+        chart.x_legend = x_legend
       end
 
       unless get_x_legend.nil?
-        legend = YLegend.new(get_y_legend)
-        legend.set_style('{font-size: 12px}')
-        chart.set_y_legend(legend)
+        y_legend = OFC2::YLegend.new(get_y_legend)
+        y_legend.style = '{font-size: 12px}'
+        chart.y_legend = y_legend
       end
 
-      chart.set_bg_colour('#ffffff');
+      chart.bg_colour = '#ffffff'
 
-      @data = chart.to_s
+      render :text => chart.render
     end
   end
 
