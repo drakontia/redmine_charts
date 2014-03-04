@@ -22,12 +22,6 @@ fi
 export RAILS_ENV=test
 
 case $REDMINE_VER in
-  1.4.*)  export PATH_TO_INSTALL=./vendor/plugins # for redmine < 2.0
-          export GENERATE_SECRET=generate_session_store
-          export MIGRATE_PLUGINS=db:migrate_plugins
-          export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
-          export REDMINE_GIT_TAG=$REDMINE_VER
-          ;;
   2.*)  export PATH_TO_INSTALL=./plugins # for redmine 2.0
           export GENERATE_SECRET=generate_secret_token
           export MIGRATE_PLUGINS=redmine:plugins:migrate
@@ -95,16 +89,11 @@ ln -sf $PATH_TO_PLUGIN $PATH_TO_INSTALL/$NAME_OF_PLUGIN
 # copy database.yml
 cp $TESTSPACE/database.yml config/
 
-# copy Gemfile (need if bundler >= 1.3.0?)
-cp $PATH_TO_INSTALL/$NAME_OF_PLUGIN/Gemfile.local $PATH_TO_REDMINE/
-
 # install gems
 mkdir -p vendor/bundle
 bundle install --path vendor/bundle
 
 git clone git://github.com/drakontia/redmine_open_flash_chart.git $PATH_TO_INSTALL/redmine_open_flash_chart
-#mkdir -p public/plugin_assets/open_flash_chart
-#cp -r $PATH_TO_INSTALL/open_flash_chart/assets/* public/plugin_assets/open_flash_chart/
 
 # run redmine database migrations
 bundle exec rake db:migrate
