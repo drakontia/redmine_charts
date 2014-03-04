@@ -151,7 +151,7 @@ class ChartsController < ApplicationController
       end
 
       unless get_x_legend.nil?
-        y_legend = OFC2::YLegend.new(get_y_legend)
+        y_legend = OFC2::YLegend.new(:text => get_y_legend)
         y_legend.style = '{font-size: 12px}'
         chart.y_legend = y_legend
       end
