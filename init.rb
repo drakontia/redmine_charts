@@ -1,19 +1,10 @@
 require 'redmine'
 
+require 'ofc2'
 require 'redmine_charts'
 
-if Rails::VERSION::MAJOR < 3
-  RAILS_DEFAULT_LOGGER.info 'Starting Charts Plugin for RedMine'
-
-  require 'dispatcher'
-  object_to_prepare = Dispatcher
-else
-  Rails.logger.info 'Starting Charts Plugin for RedMine'
-  object_to_prepare = Rails.configuration
-  # if redmine plugins were railties:
-  # object_to_prepare = config
-end
-object_to_prepare.to_prepare do
+Rails.logger.info 'Starting Charts Plugin for RedMine'
+Rails.configuration.to_prepare do
   require_dependency 'issue'
   require_dependency 'time_entry'
 
@@ -35,7 +26,7 @@ Redmine::Plugin.register :redmine_charts do
 
   # Minimum version of Redmine.
 
-  requires_redmine :version_or_higher => '1.4.0'
+  requires_redmine :version_or_higher => '2.0.0'
 
   # Configuring permissions for plugin's controllers.
 
