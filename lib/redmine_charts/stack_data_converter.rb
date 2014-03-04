@@ -26,10 +26,10 @@ module RedmineCharts
             v
           end
         end
-        keys << OFC2::BarStackKey.new(:colour => RedmineCharts::Utils.color(i), :text => set[0], :font-size => 10)
+        keys << OFC2::BarStackKey.new(:colour => RedmineCharts::Utils.color(i), :text => set[0], :font_size => 10)
       end
 
-      keys << OFC2::BarStackKey.new(:colour => '#000000', :text => l(:charts_deviation_group_estimated), :font-size => 10)
+      keys << OFC2::BarStackKey.new(:colour => '#000000', :text => l(:charts_deviation_group_estimated), :font_size => 10)
 
       bar.values = values
       bar.set_keys keys
@@ -50,15 +50,3 @@ module RedmineCharts
 
   end
 end
-
-# Fixes error with BarStackValue is OpenFlashChart ruby library
-module OpenFlashChart
-  class BarStackValue < Base
-    def initialize(val,colour, args={})
-      @val    = val
-      @colour = colour
-      super args
-    end
-  end
-end
-
