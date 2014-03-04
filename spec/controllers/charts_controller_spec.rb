@@ -11,7 +11,7 @@ class ChartsController
   end
 
   def get_data_value
-    @data
+    create_chart
   end
 
 end
