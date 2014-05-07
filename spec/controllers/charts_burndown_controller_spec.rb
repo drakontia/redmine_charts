@@ -17,7 +17,7 @@ describe ChartsBurndownController do
     get :index, :project_id => 15041, :project_ids => [15041, 15042], :limit => '4', :range => 'days', :offset => '1'
     response.should be_success
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body['y_legend']['text'].should == l(:charts_burndown_y)
     body['x_legend']['text'].should == l(:charts_burndown_x)
     body['y_axis']['max'].should be_within( 1).of(81)
@@ -83,7 +83,7 @@ describe ChartsBurndownController do
       get :index, :project_id => 15044, :project_ids => [15044], :limit => '1', :range => 'weeks', :offset => '0'
       response.should be_success
 
-      body = ActiveSupport::JSON.decode(assigns[:data])
+      body = ActiveSupport::JSON.decode(assigns[:chart].render)
       body['elements'][0]['values'].size.should == 1
 
       body['elements'][0]['values'][0]['value'].should be_within(0.1).of(12)

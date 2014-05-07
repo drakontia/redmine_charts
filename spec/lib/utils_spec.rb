@@ -4,14 +4,21 @@ module RedmineCharts
   describe Utils do
     before(:all) do
       @utils = RedmineCharts::Utils
-    end 
+    end
 
     it "should return default_controller" do
       @utils.default_controller.should == "charts_burndown"
     end
 
     it "should return controllers for permissions" do
-      @utils.controllers_for_permissions.should == {:charts_burndown => :index, :charts_burndown2 => :index, :charts_ratio => :index, :charts_timeline => :index, :charts_deviation => :index, :charts_issue => :index}
+      @utils.controllers_for_permissions.should == {
+        :charts_burndown => :index,
+        :charts_burndown2 => :index,
+        :charts_ratio => :index,
+        :charts_timeline => :index,
+        :charts_deviation => :index,
+        :charts_issue => :index
+      }
     end
 
     it "should return routings" do

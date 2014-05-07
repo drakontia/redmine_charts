@@ -69,11 +69,11 @@ module RedmineCharts
       end
 
       def chart_update_issue_done_ratio
-        RedmineCharts::IssuePatch.add_chart_done_ratio(self.project_id, self.id, self.status_id, self.done_ratio, Time.now)
+        RedmineCharts::IssuePatch.add_chart_done_ratio(self.project_id, self.id, self.status_id, self.done_ratio, Time.now.to_date)
       end
 
       def chart_update_issue_status
-        RedmineCharts::IssuePatch.add_chart_issue_status(self.project_id, self.id, self.status_id, Time.now)
+        RedmineCharts::IssuePatch.add_chart_issue_status(self.project_id, self.id, self.status_id, Time.now.to_date)
       end
 
     end

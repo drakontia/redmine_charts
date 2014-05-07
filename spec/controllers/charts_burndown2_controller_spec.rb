@@ -16,7 +16,7 @@ describe ChartsBurndown2Controller do
     get :index, :project_id => 15041, :fixed_version_ids => [15042]
     response.should be_success
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body['y_legend']['text'].should == l(:charts_burndown2_y)
     body['x_legend']['text'].should == l(:charts_burndown2_x)
     body['y_axis']['max'].should be_within(1).of(24)
@@ -53,7 +53,7 @@ describe ChartsBurndown2Controller do
       get :index, :project_id => 15044, :fixed_version_ids => [15043]
       response.should be_success
 
-      body = ActiveSupport::JSON.decode(assigns[:data])
+      body = ActiveSupport::JSON.decode(assigns[:chart].render)
       body['elements'][0]['values'][0]['value'].should be_within(0.1).of(12)
       body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == "#{l(:charts_burndown2_hint_velocity, :remaining_hours => 12.0)}<br>#{'20 Mar 10'}"
 

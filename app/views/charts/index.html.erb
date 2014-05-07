@@ -1,7 +1,7 @@
 <% html_title(l(:charts_menu_label)) -%>
 
 <% content_for :header_tags do %>
-  <%= javascript_include_tag('swfobject.js',:plugin=>'redmine_open_flash_chart') %>
+  <%= javascript_include_tag "swfobject" %>
   <%= javascript_include_tag('charts.js', :plugin=>'redmine_charts') %>
 <% end %>
 
@@ -44,6 +44,7 @@
         <%= render :partial => 'charts/filters' %>
       </div>
     </fieldset>
+  </div>
 
   <p class="buttons">
     <%= submit_tag l(:button_apply), :class => 'button-small', :onclick => "$('chart_form_action').value = ''; $('page') = '1'; $('chart_form').submit(); return false;" %>

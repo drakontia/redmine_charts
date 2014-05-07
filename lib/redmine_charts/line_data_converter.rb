@@ -15,24 +15,25 @@ module RedmineCharts
 
         j = -1
 
-        #vals = set[1].collect do |v|
-        set[1].collect do |v|
+        vals = set[1].collect do |v|
           j += 1
           if v.is_a? Array
-            line.values = (v[0])
+            d = OFC2::Dot.new
+            d.value = v[0]
             if v[2]
-              line.dot_size = 4
+              d.dot_size = 4
             end
-            line.colour = RedmineCharts::Utils.color(index)
-            line.tip = "#{v[1]}<br>#{data[:labels][j]}" unless v[1].nil?
+            d.colour = RedmineCharts::Utils.color(index)
+            d.tip = "#{v[1]}<br>#{data[:labels][j]}" unless v[1].nil?
+            d
           else
-            line.values = v
+            v
           end
         end
 
-        #line.values = vals
+        line.values = vals
 
-        chart << line
+        chart.add_element(line)
         index += 1
       end
     end

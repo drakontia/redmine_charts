@@ -43,8 +43,8 @@ class ChartTimeEntry < ActiveRecord::Base
 
     rows = all(:joins => joins, :select => select, :conditions => conditions, :readonly => true, :group => grouping, :order => "1 asc, 6 asc")
 
-    rows.each do |row|
-      row.group_id = '0' unless row.group_id
+    rows.each do |rowa|
+      rowa.group_id = '0' unless rowa.group_id
     end
 
     [rows, range]
@@ -61,7 +61,7 @@ class ChartTimeEntry < ActiveRecord::Base
     end
 
     range = RedmineCharts::RangeUtils.prepare_range(range)
-    
+
     range[:column] = RedmineCharts::ConditionsUtils.to_column(range[:range], "chart_time_entries")
 
     conditions[range[:column]] = '1'..range[:max]

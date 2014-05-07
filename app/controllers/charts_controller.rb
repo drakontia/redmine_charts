@@ -76,11 +76,16 @@ class ChartsController < ApplicationController
 
     @saved_conditions = ChartSavedCondition.all(:conditions => ["project_id is null or project_id = ?", @project.id])
 
-    #create_chart
-    @graph = ofc2('100%', 400, 'create_chart')
+    @chart = create_chart
 
     if @error and not flash[:error]
       flash.now[:error] = l(@error)
+    end
+
+    begin
+      @graph = ofc2('100%', 400, @chart.render)
+    rescue
+      @graph = nil
     end
 
     render :template => "charts/index"
@@ -158,7 +163,7 @@ class ChartsController < ApplicationController
 
       chart.bg_colour = '#ffffff'
 
-      render :text => chart.render and return
+      chart
     end
   end
 

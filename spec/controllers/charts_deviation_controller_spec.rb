@@ -14,7 +14,7 @@ describe ChartsDeviationController do
     get :index, :project_id => 15041, :project_ids => [15041]
     response.should be_success
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body['elements'][0]['values'].size.should == 4
 
     body['elements'][0]['values'][0][0]['val'].should be_within( 1).of(74.0)
@@ -80,24 +80,24 @@ describe ChartsDeviationController do
     get :index, :project_id => 15041, :project_ids => [15041, 15042]
     response.should be_success
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body['elements'][0]['values'].size.should == 5
   end
 
   it "should return data with pagination" do
     get :index, :project_id => 15041, :project_ids => [15041], :per_page => 2
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body['elements'][0]['values'].size.should == 3
 
     get :index, :project_id => 15041, :project_ids => [15041], :per_page => 2, :page => 2
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body['elements'][0]['values'].size.should == 2
 
     get :index, :project_id => 15041, :project_ids => [15041], :per_page => 2, :page => 3
 
-    body = ActiveSupport::JSON.decode(assigns[:data])
+    body = ActiveSupport::JSON.decode(assigns[:chart].render)
     body.should be_nil
   end
 
@@ -106,7 +106,7 @@ describe ChartsDeviationController do
       get :index, :project_id => 15044, :project_ids => [15044]
       response.should be_success
 
-      body = ActiveSupport::JSON.decode(assigns[:data])
+      body = ActiveSupport::JSON.decode(assigns[:chart].render)
       body['elements'][0]['values'].size.should == 5
 
       body['elements'][0]['values'][0][0]['val'].should be_within( 1).of(110.0)
