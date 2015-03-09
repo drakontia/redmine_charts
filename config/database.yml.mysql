@@ -1,0 +1,19 @@
+mysql: &mysql
+  adapter: mysql2
+  username: root
+  password:
+  database: charts
+
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  <<: *<%= ENV['DB'] || "unspecified" %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

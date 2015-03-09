@@ -1,0 +1,20 @@
+postgresql: &postgresql
+  adapter: postgresql
+  username: postgres
+  password:
+  database: charts
+  min_messages: ERROR
+
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  <<: *<%= ENV['DB'] || "unspecified" %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
