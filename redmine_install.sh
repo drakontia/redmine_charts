@@ -55,7 +55,6 @@ export BUNDLE_GEMFILE=$PATH_TO_REDMINE/Gemfile
 
 clone_redmine()
 {
-  cp config/database.yml.${DB} $TESTSPACE/database.yml
   set -e # exit if clone fails
   git clone -b master --depth=100 --quiet $REDMINE_GIT_REPO $PATH_TO_REDMINE
   cd $PATH_TO_REDMINE
@@ -94,12 +93,13 @@ echo current directory is `pwd`
 # create a link to the backlogs plugin
 ln -sf $PATH_TO_PLUGIN $PATH_TO_INSTALL/$NAME_OF_PLUGIN
 
+# copy database.yml
+cp config/database.yml.${DB} $TESTSPACE/database.yml
+cp $TESTSPACE/database.yml config/
+
 # install gems
 mkdir -p vendor/bundle
 bundle install --path vendor/bundle
-
-# copy database.yml
-cp $TESTSPACE/database.yml config/
 
 git clone git://github.com/pullmonkey/open_flash_chart.git $PATH_TO_INSTALL/open_flash_chart
 mkdir -p public/plugin_assets/open_flash_chart
