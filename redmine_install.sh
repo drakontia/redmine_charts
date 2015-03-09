@@ -22,13 +22,13 @@ fi
 export RAILS_ENV=test
 
 case $REDMINE_VER in
-  1.4.*)  export PATH_TO_INSTALL=./vendor/plugins # for redmine < 2.0
-          export GENERATE_SECRET=generate_session_store
-          export MIGRATE_PLUGINS=db:migrate_plugins
+  2.*)  export PATH_TO_INSTALL=./plugins # for redmine 2.0
+          export GENERATE_SECRET=generate_secret_token
+          export MIGRATE_PLUGINS=redmine:plugins:migrate
           export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
           export REDMINE_GIT_TAG=$REDMINE_VER
           ;;
-  2.*)  export PATH_TO_INSTALL=./plugins # for redmine 2.0
+  3.*)  export PATH_TO_INSTALL=./plugins # for redmine 2.0
           export GENERATE_SECRET=generate_secret_token
           export MIGRATE_PLUGINS=redmine:plugins:migrate
           export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
@@ -55,6 +55,7 @@ export BUNDLE_GEMFILE=$PATH_TO_REDMINE/Gemfile
 
 clone_redmine()
 {
+  cp config/database.yml.${DB} $TESTSPACE/database.yml
   set -e # exit if clone fails
   git clone -b master --depth=100 --quiet $REDMINE_GIT_REPO $PATH_TO_REDMINE
   cd $PATH_TO_REDMINE
