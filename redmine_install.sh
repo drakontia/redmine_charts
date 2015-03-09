@@ -94,7 +94,6 @@ echo current directory is `pwd`
 ln -sf $PATH_TO_PLUGIN $PATH_TO_INSTALL/$NAME_OF_PLUGIN
 
 # copy database.yml
-cp config/database.yml.${DB} $TESTSPACE/database.yml
 cp $TESTSPACE/database.yml config/
 
 # install gems
