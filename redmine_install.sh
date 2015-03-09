@@ -59,7 +59,7 @@ clone_redmine()
   git clone -b master --depth=100 --quiet $REDMINE_GIT_REPO $PATH_TO_REDMINE
   cd $PATH_TO_REDMINE
   git fetch origin refs/tags/$REDMINE_GIT_TAG
-  git checkout $REDMINE_GIT_TAG
+  #git checkout $REDMINE_GIT_TAG
 }
 
 run_tests()
