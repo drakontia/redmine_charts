@@ -95,7 +95,7 @@ cp $TESTSPACE/database.yml config/
 
 # install gems
 mkdir -p vendor/bundle
-bundle install --path vendor/bundle
+bundle install --path vendor/bundle --without development
 
 git clone git://github.com/pullmonkey/open_flash_chart.git $PATH_TO_INSTALL/open_flash_chart
 mkdir -p public/plugin_assets/open_flash_chart
