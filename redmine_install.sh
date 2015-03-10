@@ -63,7 +63,14 @@ run_tests()
 
   cd $PATH_TO_REDMINE
 
-  bash $PATH_TO_TESTER
+  #bash $PATH_TO_TESTER
+  ln -sf $PATH_TO_INSTALL/$NAME_OF_PLUGIN/spec/ .
+
+  mkdir -p coverage
+  ln -sf `pwd`/coverage $TESTSPACE
+
+  # run rspec
+  bundle exec rspec spec --color --format doc
 
 }
 

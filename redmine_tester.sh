@@ -11,11 +11,7 @@ ln -sf `pwd`/coverage $TESTSPACE
 #bundle exec rake redmine:backlogs:prepare_fixtures
 
 # run rspec
-if [ ${REDMINE_VER} = "1.4.5" ]; then
-    bundle exec spec:rcov --color --format nested
-else
-    bundle exec rspec spec --color --format doc
-fi
+bundle exec rspec spec --color --format doc
 #bundle exec rake redmine:plugins:test
 
 # run cucumber
