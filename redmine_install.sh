@@ -23,32 +23,26 @@ export RAILS_ENV=test
 
 case $REDMINE_VER in
   2.*)  export PATH_TO_INSTALL=./plugins # for redmine 2.0
-          export GENERATE_SECRET=generate_secret_token
-          export MIGRATE_PLUGINS=redmine:plugins:migrate
-          export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
-          export REDMINE_GIT_TAG=$REDMINE_VER
-          ;;
-  3.*)  export PATH_TO_INSTALL=./plugins # for redmine 2.0
-          export GENERATE_SECRET=generate_secret_token
-          export MIGRATE_PLUGINS=redmine:plugins:migrate
-          export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
-          export REDMINE_GIT_TAG=$REDMINE_VER
-          ;;
+        export GENERATE_SECRET=generate_secret_token
+        export MIGRATE_PLUGINS=redmine:plugins:migrate
+        export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
+        export REDMINE_GIT_TAG=$REDMINE_VER
+        ;;
+  3.*)  export PATH_TO_INSTALL=./plugins # for redmine 3.0
+        export GENERATE_SECRET=generate_secret_token
+        export MIGRATE_PLUGINS=redmine:plugins:migrate
+        export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
+        export REDMINE_GIT_TAG=$REDMINE_VER
+        ;;
   master) export PATH_TO_INSTALL=./plugins # for redmine 2.0
-          export GENERATE_SECRET=generate_secret_token
-          export MIGRATE_PLUGINS=redmine:plugins:migrate
-          export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
-          export REDMINE_GIT_TAG=$REDMINE_VER
-          ;;
-  v3.3.0) export PATH_TO_INSTALL=./vendor/plugins
-          export GENERATE_SECRET=generate_session_store
-          export MIGRATE_PLUGINS=db:migrate:plugins
-          export REDMINE_GIT_REPO=http://github.com/chiliproject/chiliproject.git
-          export REDMINE_GIT_TAG=$REDMINE_VER
-          ;;
-  *)      echo "Unsupported platform $REDMINE_VER"
-          exit 1
-          ;;
+        export GENERATE_SECRET=generate_secret_token
+        export MIGRATE_PLUGINS=redmine:plugins:migrate
+        export REDMINE_GIT_REPO=git://github.com/edavis10/redmine.git
+        export REDMINE_GIT_TAG=$REDMINE_VER
+        ;;
+  *)    echo "Unsupported platform $REDMINE_VER"
+        exit 1
+        ;;
 esac
 
 export BUNDLE_GEMFILE=$PATH_TO_REDMINE/Gemfile
@@ -90,8 +84,11 @@ set -e
 cd $PATH_TO_REDMINE
 echo current directory is `pwd`
 
-# create a link to the backlogs plugin
+# create a link to the charts plugin
 ln -sf $PATH_TO_PLUGIN $PATH_TO_INSTALL/$NAME_OF_PLUGIN
+
+#Overwrite Gemfile for testing
+mv $PATH_TO_INSTALL/$NAME_OF_PLUGIN/Gemfile.local $PATH_TO_INSTALL/$NAME_OF_PLUGIN/Gemfile
 
 # copy database.yml
 cp $TESTSPACE/database.yml config/

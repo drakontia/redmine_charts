@@ -14,11 +14,11 @@ env:
 matrix:
   allow_failures:
     - rvm: jruby-19mode
-  exclude: # anyone is free to adopt a build, until then, no builds that don't have a maintainer
     - rvm: 2.0.0
       env: REDMINE_VER=2.6.0 DB=mysql
     - rvm: 2.0.0
       env: REDMINE_VER=2.6.0 DB=postgresql
+  exclude: # anyone is free to adopt a build, until then, no builds that don't have a maintainer
 
 install: "echo skip bundle install"
 before_script:
