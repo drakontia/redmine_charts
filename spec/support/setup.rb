@@ -27,7 +27,7 @@ def seed_the_database
   if Rails::VERSION::MAJOR < 3
     fixtures = Fixtures
   else
-    fixtures = ActiveRecord::Fixtures
+    fixtures = ActiveRecord::FixtureSet
   end
   #Before do # a little longer, but more reliable
     seed_the_database_with(fixtures)
