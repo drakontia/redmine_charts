@@ -81,7 +81,7 @@ Rspec.describe ChartsBurndownController, type: :controller do
   it 'should return data with range weeks limit 1 if it has sub_tasks' do
     if RedmineCharts.has_sub_issues_functionality_active
       get :index, project_id: 15044, project_ids: [15044], limit: 1, range: 'weeks', offset: 0
-      response.should be_success
+      expect(response).to be_success
 
       expect(assigns(:data).elements[0].values.size).to eq 1
 

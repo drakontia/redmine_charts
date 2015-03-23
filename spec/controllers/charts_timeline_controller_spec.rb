@@ -14,641 +14,641 @@ describe ChartsTimelineController do
 
   it "should return data with range weeks offset 0" do
     get :index, :project_id => 15041, :project_ids => 15041, :limit => 10, :range => 'weeks', :offset => 0
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['x_axis']['min'].should == 0
-    body['x_axis']['steps'].should == 1
-    body['x_axis']['max'].should == 9
-    body['x_axis']['labels']['labels'].size.should == 10
-    body['elements'][0]['values'].size.should == 10
+    expect(body['x_axis']['min']).to eq(0)
+    expect(body['x_axis']['steps']).to eq(1)
+    expect(body['x_axis']['max']).to eq(9)
+    expect(body['x_axis']['labels']['labels'].size).to eq(10)
+    expect(body['elements'][0]['values'].size).to eq(10)
 
-    body['x_axis']['labels']['labels'][0].should == '4 - 10 Jan 10'
-    body['x_axis']['labels']['labels'][1].should == ""
-    body['x_axis']['labels']['labels'][2].should == '18 - 24 Jan 10'
-    body['x_axis']['labels']['labels'][3].should == ""
-    body['x_axis']['labels']['labels'][4].should == '1 - 7 Feb 10'
-    body['x_axis']['labels']['labels'][5].should == ""
-    body['x_axis']['labels']['labels'][6].should == '15 - 21 Feb 10'
-    body['x_axis']['labels']['labels'][7].should == ""
-    body['x_axis']['labels']['labels'][8].should == '1 - 7 Mar 10'
-    body['x_axis']['labels']['labels'][9].should == ""
+    expect(body['x_axis']['labels']['labels'][0]).to eq('4 - 10 Jan 10')
+    expect(body['x_axis']['labels']['labels'][1]).to eq("")
+    expect(body['x_axis']['labels']['labels'][2]).to eq('18 - 24 Jan 10')
+    expect(body['x_axis']['labels']['labels'][3]).to eq("")
+    expect(body['x_axis']['labels']['labels'][4]).to eq('1 - 7 Feb 10')
+    expect(body['x_axis']['labels']['labels'][5]).to eq("")
+    expect(body['x_axis']['labels']['labels'][6]).to eq('15 - 21 Feb 10')
+    expect(body['x_axis']['labels']['labels'][7]).to eq("")
+    expect(body['x_axis']['labels']['labels'][8]).to eq('1 - 7 Mar 10')
+    expect(body['x_axis']['labels']['labels'][9]).to eq("")
   end
 
   it "should return data with range weeks offset 10" do
     get :index, :project_id => 15041, :project_ids => 15041, :offset => 10, :limit => 10, :range => 'weeks'
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['x_axis']['labels']['labels'].size.should == 10
-    body['elements'][0]['values'].size.should == 10
+    expect(body['x_axis']['labels']['labels'].size).to eq(10)
+    expect(body['elements'][0]['values'].size).to eq(10)
 
-    body['x_axis']['labels']['labels'][0].should == '26 Oct - 1 Nov 09'
-    body['x_axis']['labels']['labels'][1].should == ""
-    body['x_axis']['labels']['labels'][2].should == '9 - 15 Nov 09'
-    body['x_axis']['labels']['labels'][3].should == ""
-    body['x_axis']['labels']['labels'][4].should == '23 - 29 Nov 09'
-    body['x_axis']['labels']['labels'][5].should == ""
-    body['x_axis']['labels']['labels'][6].should == '7 - 13 Dec 09'
-    body['x_axis']['labels']['labels'][7].should == ""
-    body['x_axis']['labels']['labels'][8].should == '21 - 27 Dec 09'
-    body['x_axis']['labels']['labels'][9].should == ""
+    expect(body['x_axis']['labels']['labels'][0]).to eq('26 Oct - 1 Nov 09')
+    expect(body['x_axis']['labels']['labels'][1]).to eq("")
+    expect(body['x_axis']['labels']['labels'][2]).to eq('9 - 15 Nov 09')
+    expect(body['x_axis']['labels']['labels'][3]).to eq("")
+    expect(body['x_axis']['labels']['labels'][4]).to eq('23 - 29 Nov 09')
+    expect(body['x_axis']['labels']['labels'][5]).to eq("")
+    expect(body['x_axis']['labels']['labels'][6]).to eq('7 - 13 Dec 09')
+    expect(body['x_axis']['labels']['labels'][7]).to eq("")
+    expect(body['x_axis']['labels']['labels'][8]).to eq('21 - 27 Dec 09')
+    expect(body['x_axis']['labels']['labels'][9]).to eq("")
   end
 
   it "should return data with range weeks offset 20" do
     get :index, :project_id => 15041, :project_ids => 15041, :offset => 20, :limit => 20, :range => 'weeks'
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['x_axis']['labels']['labels'].size.should == 20
-    body['elements'][0]['values'].size.should == 20
+    expect(body['x_axis']['labels']['labels'].size).to eq(20)
+    expect(body['elements'][0]['values'].size).to eq(20)
 
-    body['x_axis']['labels']['labels'][0].should == '8 - 14 Jun 09'
-    body['x_axis']['labels']['labels'][1].should == ""
-    body['x_axis']['labels']['labels'][2].should == ""
-    body['x_axis']['labels']['labels'][3].should == ""
-    body['x_axis']['labels']['labels'][4].should == '6 - 12 Jul 09'
-    body['x_axis']['labels']['labels'][5].should == ""
-    body['x_axis']['labels']['labels'][6].should == ""
-    body['x_axis']['labels']['labels'][7].should == ""
-    body['x_axis']['labels']['labels'][8].should == '3 - 9 Aug 09'
-    body['x_axis']['labels']['labels'][9].should == ""
-    body['x_axis']['labels']['labels'][10].should == ""
-    body['x_axis']['labels']['labels'][11].should == ""
-    body['x_axis']['labels']['labels'][12].should == '31 Aug - 6 Sep 09'
-    body['x_axis']['labels']['labels'][13].should == ""
-    body['x_axis']['labels']['labels'][14].should == ""
-    body['x_axis']['labels']['labels'][15].should == ""
-    body['x_axis']['labels']['labels'][16].should == '28 Sep - 4 Oct 09'
-    body['x_axis']['labels']['labels'][17].should == ""
-    body['x_axis']['labels']['labels'][18].should == ""
-    body['x_axis']['labels']['labels'][19].should == ""
+    expect(body['x_axis']['labels']['labels'][0]).to eq('8 - 14 Jun 09')
+    expect(body['x_axis']['labels']['labels'][1]).to eq("")
+    expect(body['x_axis']['labels']['labels'][2]).to eq("")
+    expect(body['x_axis']['labels']['labels'][3]).to eq("")
+    expect(body['x_axis']['labels']['labels'][4]).to eq('6 - 12 Jul 09')
+    expect(body['x_axis']['labels']['labels'][5]).to eq("")
+    expect(body['x_axis']['labels']['labels'][6]).to eq("")
+    expect(body['x_axis']['labels']['labels'][7]).to eq("")
+    expect(body['x_axis']['labels']['labels'][8]).to eq('3 - 9 Aug 09')
+    expect(body['x_axis']['labels']['labels'][9]).to eq("")
+    expect(body['x_axis']['labels']['labels'][10]).to eq("")
+    expect(body['x_axis']['labels']['labels'][11]).to eq("")
+    expect(body['x_axis']['labels']['labels'][12]).to eq('31 Aug - 6 Sep 09')
+    expect(body['x_axis']['labels']['labels'][13]).to eq("")
+    expect(body['x_axis']['labels']['labels'][14]).to eq("")
+    expect(body['x_axis']['labels']['labels'][15]).to eq("")
+    expect(body['x_axis']['labels']['labels'][16]).to eq('28 Sep - 4 Oct 09')
+    expect(body['x_axis']['labels']['labels'][17]).to eq("")
+    expect(body['x_axis']['labels']['labels'][18]).to eq("")
+    expect(body['x_axis']['labels']['labels'][19]).to eq("")
   end
 
   it "should return data with range months with offset 0" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'months', :limit => 10, :offset => 0
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['x_axis']['labels']['labels'].size.should == 10
-    body['elements'][0]['values'].size.should == 10
+    expect(body['x_axis']['labels']['labels'].size).to eq(10)
+    expect(body['elements'][0]['values'].size).to eq(10)
 
-    body['x_axis']['labels']['labels'][0].should == 'Jun 09'
-    body['x_axis']['labels']['labels'][1].should == ""
-    body['x_axis']['labels']['labels'][2].should == 'Aug 09'
-    body['x_axis']['labels']['labels'][3].should == ""
-    body['x_axis']['labels']['labels'][4].should == 'Oct 09'
-    body['x_axis']['labels']['labels'][5].should == ""
-    body['x_axis']['labels']['labels'][6].should == 'Dec 09'
-    body['x_axis']['labels']['labels'][7].should == ""
-    body['x_axis']['labels']['labels'][8].should == 'Feb 10'
-    body['x_axis']['labels']['labels'][9].should == ""
+    expect(body['x_axis']['labels']['labels'][0]).to eq('Jun 09')
+    expect(body['x_axis']['labels']['labels'][1]).to eq("")
+    expect(body['x_axis']['labels']['labels'][2]).to eq('Aug 09')
+    expect(body['x_axis']['labels']['labels'][3]).to eq("")
+    expect(body['x_axis']['labels']['labels'][4]).to eq('Oct 09')
+    expect(body['x_axis']['labels']['labels'][5]).to eq("")
+    expect(body['x_axis']['labels']['labels'][6]).to eq('Dec 09')
+    expect(body['x_axis']['labels']['labels'][7]).to eq("")
+    expect(body['x_axis']['labels']['labels'][8]).to eq('Feb 10')
+    expect(body['x_axis']['labels']['labels'][9]).to eq("")
   end
 
   it "should return data with range days with offset 0" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :limit => 10, :offset => 0
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['x_axis']['labels']['labels'].size.should == 10
-    body['elements'][0]['values'].size.should == 10
+    expect(body['x_axis']['labels']['labels'].size).to eq(10)
+    expect(body['elements'][0]['values'].size).to eq(10)
 
-    body['x_axis']['labels']['labels'][0].should == '03 Mar 10'
-    body['x_axis']['labels']['labels'][1].should == ""
-    body['x_axis']['labels']['labels'][2].should == '05 Mar 10'
-    body['x_axis']['labels']['labels'][3].should == ""
-    body['x_axis']['labels']['labels'][4].should == '07 Mar 10'
-    body['x_axis']['labels']['labels'][5].should == ""
-    body['x_axis']['labels']['labels'][6].should == '09 Mar 10'
-    body['x_axis']['labels']['labels'][7].should == ""
-    body['x_axis']['labels']['labels'][8].should == '11 Mar 10'
-    body['x_axis']['labels']['labels'][9].should == ""
+    expect(body['x_axis']['labels']['labels'][0]).to eq('03 Mar 10')
+    expect(body['x_axis']['labels']['labels'][1]).to eq("")
+    expect(body['x_axis']['labels']['labels'][2]).to eq('05 Mar 10')
+    expect(body['x_axis']['labels']['labels'][3]).to eq("")
+    expect(body['x_axis']['labels']['labels'][4]).to eq('07 Mar 10')
+    expect(body['x_axis']['labels']['labels'][5]).to eq("")
+    expect(body['x_axis']['labels']['labels'][6]).to eq('09 Mar 10')
+    expect(body['x_axis']['labels']['labels'][7]).to eq("")
+    expect(body['x_axis']['labels']['labels'][8]).to eq('11 Mar 10')
+    expect(body['x_axis']['labels']['labels'][9]).to eq("")
   end
 
   it "should return data without grouping" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :limit => 10, :offset => 0
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 1
-    body['y_axis']['max'].should be_close(9, 1)
-    body['y_legend']['text'].should == l(:charts_timeline_y)
+    expect(body['elements'].size).to eq(1)
+    expect(body['y_axis']['max']).to be_within(1).of(9)
+    expect(body['y_legend']['text']).to eq(l(:charts_timeline_y))
 
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(7.4, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(7.4, 2, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(7.4)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(7.4, 2, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with range days with offset 0" do
     get :index, :project_id => 15041, :project_ids => [15041, 15042], :range => 'days', :limit => 10, :offset => 0
-    response.should be_success
+    expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'][0]['value'].should be_close(14.9, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(14.9)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 14.9 : 15.0
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 3, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 3, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(7.4, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(7.4, 2, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(7.4)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(7.4, 2, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with grouping by users" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'user_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 3
+    expect(body['elements'].size).to eq(3)
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == 'John Smith'
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq('John Smith')
 
-    body['elements'][1]['values'][0]['value'].should be_close(3.3, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(3.3)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(3.3, 1, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'Dave Lopper'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('Dave Lopper')
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
 
-    body['elements'][2]['values'].size.should == 4
-    body['elements'][2]['text'].should == 'Redmine Admin'
+    expect(body['elements'][2]['values'].size).to eq(4)
+    expect(body['elements'][2]['text']).to eq('Redmine Admin')
 
-    body['elements'][2]['values'][0]['value'].should be_close(3.3, 0.1)
-    body['elements'][2]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][2]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][2]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
+    expect(body['elements'][2]['values'][0]['value']).to be_within(0.1).of(3.3)
+    expect(body['elements'][2]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(3.3, 1, '09 Mar 10'))
+    expect(body['elements'][2]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][2]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_priorities" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'priority_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'High'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('High')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_authors" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'author_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should ==  l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'Redmine Admin'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('Redmine Admin')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_projects" do
     get :index, :project_id => 15041, :grouping => 'project_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 1
+    expect(body['elements'].size).to eq(1)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == '#15041 Project1'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('#15041 Project1')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(7.4, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(7.4, 2, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(7.4)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(7.4, 2, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_statuses" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'status_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'New'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('New')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_trackers" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'tracker_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'Bug'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('Bug')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_issues" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'issue_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == '#15045 Issue5'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('#15045 Issue5')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_versions" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'fixed_version_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == '2.0'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('2.0')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_categories" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'category_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'Category2'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('Category2')
 
-    body['elements'][0]['values'][0]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == l(:charts_group_none)
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq(l(:charts_group_none))
 
-    body['elements'][1]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with grouping_by_activities" do
     get :index, :project_id => 15041, :project_ids => 15041, :grouping => 'activity_id', :range => 'days', :limit => 4, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'].size.should == 2
+    expect(body['elements'].size).to eq(2)
 
-    body['elements'][0]['values'].size.should == 4
-    body['elements'][0]['text'].should == 'Design'
+    expect(body['elements'][0]['values'].size).to eq(4)
+    expect(body['elements'][0]['text']).to eq('Design')
 
-    body['elements'][0]['values'][0]['value'].should be_close(3.3, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(3.3)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(3.3, 1, '09 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
 
-    body['elements'][1]['values'].size.should == 4
-    body['elements'][1]['text'].should == 'Development'
+    expect(body['elements'][1]['values'].size).to eq(4)
+    expect(body['elements'][1]['text']).to eq('Development')
 
-    body['elements'][1]['values'][0]['value'].should be_close(3.3, 0.1)
-    body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][1]['values'][1]['value'].should be_close(5.1, 0.1)
-    body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
+    expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(3.3)
+    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(3.3, 1, '09 Mar 10'))
+    expect(body['elements'][1]['values'][1]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][1]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
   end
 
   it "should return data with users_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :user_ids => 1, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(4.3, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(4.3)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 4.3 : 4.4
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 1, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(3.3, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 1, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(3.3)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(3.3, 1, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with issues_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :issue_ids => 15045, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")    .should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", ""))    .to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with activities_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :activity_ids => 9, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 4.3 : 4.4
 
-    body['elements'][0]['values'][0]['value'].should be_close(4.3, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 1, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(4.3)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 1, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(3.3, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(3.3, 1, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(5.1, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(5.1, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(3.3)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(3.3, 1, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(5.1)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(5.1, 1, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with priorities_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :priority_ids => 4, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with trackers_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :tracker_ids => 1, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with versions_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :limit => 10, :fixed_version_ids => 15042, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with categories_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :category_ids => 15042, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(6.6, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(6.6, 2, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(6.6)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(6.6, 2, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
 
@@ -656,67 +656,67 @@ describe ChartsTimelineController do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :status_ids => 2, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(7.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(7.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 7.6 : 7.7
 
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with author_condition" do
     get :index, :project_id => 15041, :project_ids => 15041, :range => 'days', :author_ids => 2, :limit => 10, :offset => 0
 
     body = ActiveSupport::JSON.decode(assigns[:data])
-    body['elements'][0]['values'].size.should == 10
-    body['elements'][0]['text'].should == l(:charts_group_all)
+    expect(body['elements'][0]['values'].size).to eq(10)
+    expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-    body['elements'][0]['values'][0]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '03 Mar 10')
-    body['elements'][0]['values'][1]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '04 Mar 10')
-    body['elements'][0]['values'][2]['value'].should be_close(2.3, 0.1)
-    body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(2.3, 1, '05 Mar 10')
-    body['elements'][0]['values'][3]['value'].should be_close(6.6, 0.1)
+    expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '03 Mar 10'))
+    expect(body['elements'][0]['values'][1]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][1]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '04 Mar 10'))
+    expect(body['elements'][0]['values'][2]['value']).to be_within(0.1).of(2.3)
+    expect(body['elements'][0]['values'][2]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(2.3, 1, '05 Mar 10'))
+    expect(body['elements'][0]['values'][3]['value']).to be_within(0.1).of(6.6)
 
     tmp = ActiveRecord::Base.connection.adapter_name =~ /postgresql|sqlite/i ? 6.6 : 6.7
 
-    body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(tmp, 2, '06 Mar 10')
-    body['elements'][0]['values'][4]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '07 Mar 10')
-    body['elements'][0]['values'][5]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '08 Mar 10')
-    body['elements'][0]['values'][6]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '09 Mar 10')
-    body['elements'][0]['values'][7]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '10 Mar 10')
-    body['elements'][0]['values'][8]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '11 Mar 10')
-    body['elements'][0]['values'][9]['value'].should be_close(0, 0.1)
-    body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(0, 0, '12 Mar 10')
+    expect(body['elements'][0]['values'][3]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(tmp, 2, '06 Mar 10'))
+    expect(body['elements'][0]['values'][4]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][4]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '07 Mar 10'))
+    expect(body['elements'][0]['values'][5]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][5]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '08 Mar 10'))
+    expect(body['elements'][0]['values'][6]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][6]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '09 Mar 10'))
+    expect(body['elements'][0]['values'][7]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][7]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '10 Mar 10'))
+    expect(body['elements'][0]['values'][8]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][8]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '11 Mar 10'))
+    expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(0)
+    expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(0, 0, '12 Mar 10'))
   end
 
   it "should return data with sub_tasks" do
@@ -724,17 +724,17 @@ describe ChartsTimelineController do
       get :index, :project_id => 15044, :project_ids => 15044, :range => 'weeks', :limit => 10, :offset => 0
 
       body = ActiveSupport::JSON.decode(assigns[:data])
-      body['elements'][0]['values'].size.should == 10
-      body['elements'][0]['text'].should == l(:charts_group_all)
+      expect(body['elements'][0]['values'].size).to eq(10)
+      expect(body['elements'][0]['text']).to eq(l(:charts_group_all))
 
-      body['elements'][0]['values'][9]['value'].should be_close(13.2, 0.1)
-      body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "").should == get_label(13.2, 4, '8 - 14 Mar 10')
+      expect(body['elements'][0]['values'][9]['value']).to be_within(0.1).of(13.2)
+      expect(body['elements'][0]['values'][9]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq(get_label(13.2, 4, '8 - 14 Mar 10'))
     end
   end
 
   it "should return data with all_conditions" do
     get :index, :project_id => 15041, :category_ids => 15043, :tracker_ids => 15043, :fixed_version_ids => 15043, :fixed_version_ids => 15041, :user_ids => 15043, :issue_ids => 15043, :activity_ids => 15043, :author_ids => 1, :status_ids => 5
-    response.should be_success
+    expect(response).to be_success
   end
 
   def get_label(hours, entries, date)

@@ -9,8 +9,8 @@ describe ChartIssueStatus do
 
   it "should generate new" do
     @status.day  =  1
-    @status.should be_valid
-    @status.day.should  == 1
+    expect(@status).to be_valid
+    expect(@status.day).to  eq(1)
   end
 
 end

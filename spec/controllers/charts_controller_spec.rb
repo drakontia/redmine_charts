@@ -24,7 +24,7 @@ describe ChartsController do
 
   def get_data options = {}
     get :index, options
-    response.should be_success
+    expect(response).to be_success
     ActiveSupport::JSON.decode(@controller.get_data_value) if @controller.get_data_value
   end
 
