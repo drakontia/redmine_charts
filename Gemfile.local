@@ -1,7 +1,8 @@
 group :test do
-  gem "rspec"
-  gem "rspec-rails"
-  gem "simplecov-rcov"
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
+  gem 'simplecov-rcov'
   gem 'timecop'
 end
 
