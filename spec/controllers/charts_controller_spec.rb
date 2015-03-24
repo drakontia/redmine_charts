@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../rails_helper'
 
 class ChartsController
   def rescue_action(e)
@@ -14,7 +14,7 @@ class ChartsController
   end
 end
 
-describe ChartsController do
+Rspec.describe ChartsController, type: :controller do
 
   include Redmine::I18n
 

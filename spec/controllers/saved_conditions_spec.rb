@@ -1,17 +1,15 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../rails_helper'
 
-describe ChartsRatioController do
+Rspec.describe ChartsRatioController, type: :controller do
 
   include Redmine::I18n
-
-  before do
-    @controller = ChartsRatioController.new
-  end
 
   it 'should return_saved_conditions' do
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_041)
+    c = ChartSavedCondition.new(name: 'Test',
+                                chart: 'ratio',
+                                project_id: 15_041)
     c.conditions = { a: 'b' }
     c.save
 
@@ -39,7 +37,9 @@ describe ChartsRatioController do
   it 'should not_return_saved_conditions_for_other_project' do
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_042)
+    c = ChartSavedCondition.new(name: 'Test',
+                                chart: 'ratio',
+                                project_id: 15_042)
     c.conditions = { a: 'b' }
     c.save
 
@@ -53,7 +53,9 @@ describe ChartsRatioController do
   it 'should destroy_saved_condition' do
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_041)
+    c = ChartSavedCondition.new(name: 'Test',
+                                chart: 'ratio',
+                                project_id: 15_041)
     c.conditions = { a: 'b' }
     c.save
 
@@ -82,7 +84,14 @@ describe ChartsRatioController do
     ChartSavedCondition.destroy_all
 
     @request.session[:user_id] = 1
-    get :index, project_id: 15_041, chart_form_action: 'saved_condition_create', saved_condition_create_name: 'Test', saved_condition_create_project_id: 15_041, project_ids: [15_041], grouping: :activity_id, priority_ids: [5, 6]
+    get :index,
+      project_id: 15_041,
+      chart_form_action: 'saved_condition_create',
+      saved_condition_create_name: 'Test',
+      saved_condition_create_project_id: 15_041,
+      project_ids: [15_041],
+      grouping: :activity_id,
+      priority_ids: [5, 6]
     expect(response).to be_success
 
     condition = ChartSavedCondition.first
@@ -104,7 +113,11 @@ describe ChartsRatioController do
     ChartSavedCondition.destroy_all
 
     @request.session[:user_id] = 1
-    get :index, project_id: 15_041, chart_form_action: 'saved_condition_create', saved_condition_create_name: '', saved_condition_create_project_id: 15_041
+    get :index,
+      project_id: 15_041,
+      chart_form_action: 'saved_condition_create',
+      saved_condition_create_name: '',
+      saved_condition_create_project_id: 15_041
     expect(response).to be_success
 
     expect(flash[:error]).to eq(l(:charts_saved_condition_flash_name_cannot_be_blank))
@@ -113,12 +126,18 @@ describe ChartsRatioController do
   it 'should return_error_for_duplicated_name' do
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_041)
+    c = ChartSavedCondition.new(name: 'Test',
+                                chart: 'ratio',
+                                project_id: 15_041)
     c.conditions = { a: 'b' }
     c.save
 
     @request.session[:user_id] = 1
-    get :index, project_id: 15_041, chart_form_action: 'saved_condition_create', saved_condition_create_name: 'Test', saved_condition_create_project_id: 15_041
+    get :index,
+      project_id: 15_041,
+      chart_form_action: 'saved_condition_create',
+      saved_condition_create_name: 'Test',
+      saved_condition_create_project_id: 15_041
     expect(response).to be_success
 
     expect(flash[:error]).to eq(l(:charts_saved_condition_flash_name_exists))
@@ -127,7 +146,9 @@ describe ChartsRatioController do
   it 'should update_saved_conditions' do
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(name: 'Old test', chart: 'old_ratio', project_id: 15_041)
+    c = ChartSavedCondition.new(name: 'Old test',
+                                chart: 'old_ratio',
+                                project_id: 15_041)
     c.conditions = { a: 'b' }
     c.save
 
