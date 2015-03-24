@@ -1,6 +1,5 @@
 module RedmineCharts
   module ConditionsUtils
-    include Redmine::I18n
 
     @@types = [:issue_ids, :project_ids, :user_ids, :category_ids, :status_ids, :activity_ids, :fixed_version_ids, :tracker_ids, :priority_ids, :author_ids, :assigned_to_ids]
 

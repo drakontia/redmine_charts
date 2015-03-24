@@ -1,5 +1,9 @@
+require 'redmine/i18n'
+
 module RedmineCharts
   module GroupingUtils
+    module_function
+
     include Redmine::I18n
 
     @@types = [:user_id, :issue_id, :activity_id, :category_id, :tracker_id, :fixed_version_id, :priority_id, :author_id, :status_id, :project_id, :assigned_to_id]

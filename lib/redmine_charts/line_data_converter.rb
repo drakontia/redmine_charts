@@ -1,5 +1,8 @@
+require 'redmine/i18n'
+
 module RedmineCharts
   module LineDataConverter
+
     include Redmine::I18n
 
     def self.convert(chart, data)

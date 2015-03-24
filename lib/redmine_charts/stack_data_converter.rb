@@ -1,5 +1,9 @@
+require 'open_flash_chart/base'
+require 'redmine/i18n'
+
 module RedmineCharts
   module StackDataConverter
+
     include Redmine::I18n
 
     def self.convert(chart, data)

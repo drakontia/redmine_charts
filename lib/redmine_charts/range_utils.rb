@@ -1,5 +1,8 @@
+require 'redmine/i18n'
+
 module RedmineCharts
   module RangeUtils
+
     include Redmine::I18n
 
     @@types = [:months, :weeks, :days]
