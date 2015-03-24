@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require File.dirname(__FILE__) + '/../rails_helper'
 
-Rspec.describe ChartDoneRatio do
+RSpec.describe ChartDoneRatio do
 
   let(:ratio) { ChartDoneRatio.new }
   before(:all) do
@@ -12,10 +12,11 @@ Rspec.describe ChartDoneRatio do
     subject { ratio.get_aggregation_for_issue(:project_ids => 15041) }
     it "should aggregation" do
       it { is_expected.to eq 100 }
-    @aggregation[15041].should == 100
-    @aggregation[15043].should == 60
-    @aggregation[15044].should == 60
-    @aggregation[15045].should == 60
+      @aggregation[15041].should == 100
+      @aggregation[15043].should == 60
+      @aggregation[15044].should == 60
+      @aggregation[15045].should == 60
+    end
   end
 
   it "should timeline" do

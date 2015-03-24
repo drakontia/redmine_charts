@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../rails_helper'
 
-Rspec.describe ChartsRatioController, type: :controller do
+RSpec.describe ChartsRatioController, type: :controller do
 
   include Redmine::I18n
 

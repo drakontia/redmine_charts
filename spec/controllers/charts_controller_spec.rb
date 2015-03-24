@@ -14,7 +14,7 @@ class ChartsController
   end
 end
 
-Rspec.describe ChartsController, type: :controller do
+RSpec.describe ChartsController, type: :controller do
 
   include Redmine::I18n
 

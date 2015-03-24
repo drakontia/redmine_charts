@@ -22,13 +22,9 @@ end
 
 # Seed the DB
 def seed_the_database
-  if Rails::VERSION::MAJOR < 3
-    fixtures = Fixtures
-  else
-    fixtures = ActiveRecord::FixtureSet
-  end
+  fixtures = ActiveRecord::FixtureSet
   # Before do # a little longer, but more reliable
-  seed_the_database_with(fixtures)
+  self.seed_the_database_with(fixtures)
   # end
 end
 
@@ -39,7 +35,7 @@ def seed_the_database_with(fixtures)
   fixtures.create_fixtures(fixtures_folder, fixtures_files)
 end
 
-seed_the_database
+self.seed_the_database
 
 # if Cucumber::Rails.respond_to?('Database')
 # only for recent cucumber-rails

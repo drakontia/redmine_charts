@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../rails_helper'
 
-Rspec.describe ChartsBurndown2Controller, type: :controller do
+RSpec.describe ChartsBurndown2Controller, type: :controller do
 
   include Redmine::I18n
 

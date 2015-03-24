@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../rails_helper'
 
-Rspec.describe ChartsRatioController, type: :controller do
+RSpec.describe ChartsRatioController, type: :controller do
 
   include Redmine::I18n
 
@@ -23,7 +23,9 @@ Rspec.describe ChartsRatioController, type: :controller do
   it 'should return_saved_conditions_for_all_projects' do
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: nil)
+    c = ChartSavedCondition.new(name: 'Test',
+                                chart: 'ratio',
+                                project_id: nil)
     c.conditions = { a: 'b' }
     c.save
 
@@ -84,7 +86,8 @@ Rspec.describe ChartsRatioController, type: :controller do
     ChartSavedCondition.destroy_all
 
     @request.session[:user_id] = 1
-    get :index,
+    get(
+      :index,
       project_id: 15_041,
       chart_form_action: 'saved_condition_create',
       saved_condition_create_name: 'Test',
@@ -92,6 +95,7 @@ Rspec.describe ChartsRatioController, type: :controller do
       project_ids: [15_041],
       grouping: :activity_id,
       priority_ids: [5, 6]
+    )
     expect(response).to be_success
 
     condition = ChartSavedCondition.first
@@ -113,14 +117,18 @@ Rspec.describe ChartsRatioController, type: :controller do
     ChartSavedCondition.destroy_all
 
     @request.session[:user_id] = 1
-    get :index,
+    get(
+      :index,
       project_id: 15_041,
       chart_form_action: 'saved_condition_create',
       saved_condition_create_name: '',
       saved_condition_create_project_id: 15_041
+    )
     expect(response).to be_success
 
-    expect(flash[:error]).to eq(l(:charts_saved_condition_flash_name_cannot_be_blank))
+    expect(flash[:error]).to eq(
+      l(:charts_saved_condition_flash_name_cannot_be_blank)
+    )
   end
 
   it 'should return_error_for_duplicated_name' do
@@ -133,11 +141,13 @@ Rspec.describe ChartsRatioController, type: :controller do
     c.save
 
     @request.session[:user_id] = 1
-    get :index,
+    get(
+      :index,
       project_id: 15_041,
       chart_form_action: 'saved_condition_create',
       saved_condition_create_name: 'Test',
       saved_condition_create_project_id: 15_041
+    )
     expect(response).to be_success
 
     expect(flash[:error]).to eq(l(:charts_saved_condition_flash_name_exists))
@@ -153,7 +163,17 @@ Rspec.describe ChartsRatioController, type: :controller do
     c.save
 
     @request.session[:user_id] = 1
-    get :index, project_id: 15_041, chart_form_action: 'saved_condition_update', saved_condition_update_name: 'Test', saved_condition_update_project_id: nil, saved_condition_id: c.id, project_ids: [15_041], grouping: :activity_id, priority_ids: [5, 6]
+    get(
+      :index,
+      project_id: 15_041,
+      chart_form_action: 'saved_condition_update',
+      saved_condition_update_name: 'Test',
+      saved_condition_update_project_id: nil,
+      saved_condition_id: c.id,
+      project_ids: [15_041],
+      grouping: :activity_id,
+      priority_ids: [5, 6]
+    )
     expect(response).to be_success
 
     condition = ChartSavedCondition.first

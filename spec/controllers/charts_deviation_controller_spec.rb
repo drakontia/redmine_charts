@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../rails_helper'
 
-Rspec.describe ChartsDeviationController, type: :controller do
+RSpec.describe ChartsDeviationController, type: :controller do
 
   include Redmine::I18n
 
