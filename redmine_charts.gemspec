@@ -10,7 +10,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.authors = ['Daisuke Miura']
   s.date = '2012-12-01'
-  s.description = 'Plugin for Redmine which integrates some nice project charts.'
+  s.description = 'Plugin for Redmine which' \
+                  'integrates some nice project charts.'
   s.email = 'mhden@drakontia.com'
   s.extra_rdoc_files = [
     'LICENSE',
@@ -85,7 +86,7 @@ Gem::Specification.new do |s|
     'spec/controllers/charts_ratio_controller_spec.rb',
     'spec/controllers/charts_timeline_controller_spec.rb',
     'spec/controllers/saved_conditions_spec.rb',
-    'spec/features/routing_spec.rb',
+    'spec/routing/routing_spec.rb',
     'spec/fixtures/chart_done_ratios.yml',
     'spec/fixtures/chart_time_entries.yml',
     'spec/fixtures/enabled_modules.yml',
@@ -147,11 +148,21 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.rubygems_version = '1.8.23'
   s.summary = 'Plugin for Redmine which integrates some nice project charts.'
+  s.license = 'MIT'
 
-  if s.respond_to? :specification_version then
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-activemodel-mocks'
+  s.add_development_dependency 'timecop'
+  s.add_development_dependency 'spork'
+  s.add_development_dependency 'guard'
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'guard-spork'
+
+  if s.respond_to? :specification_version
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0')
     else
     end
   else
