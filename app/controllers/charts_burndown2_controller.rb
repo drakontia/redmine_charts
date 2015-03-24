@@ -1,5 +1,4 @@
 class ChartsBurndown2Controller < ChartsController
-
   unloadable
 
   protected
@@ -8,11 +7,11 @@ class ChartsBurndown2Controller < ChartsController
     @conditions[:fixed_version_ids] ||= get_current_fixed_version_in(@project)
 
     version = unless @conditions[:fixed_version_ids].empty?
-      Version.first(:conditions => {:id => @conditions[:fixed_version_ids][0]})
+                Version.first(conditions: { id: @conditions[:fixed_version_ids][0] })
     end
 
     unless version
-      { :error => :charts_error_no_version }          
+      { error: :charts_error_no_version }
     else
       start_date = version.start_date || version.created_on.to_date
       end_date = version.effective_date ? version.effective_date.to_date : Time.now.to_date
@@ -30,17 +29,17 @@ class ChartsBurndown2Controller < ChartsController
         max = total_remaining_hours[index] if max < total_remaining_hours[index]
 
         if RedmineCharts::RangeUtils.date_from_day(key).to_time <= Time.now
-          remaining << [total_remaining_hours[index], l(:charts_burndown2_hint_remaining, { :remaining_hours => RedmineCharts::Utils.round(total_remaining_hours[index]), :work_done => total_done[index] > 0 ? Integer(total_done[index]) : 0 })]
+          remaining << [total_remaining_hours[index], l(:charts_burndown2_hint_remaining,  remaining_hours: RedmineCharts::Utils.round(total_remaining_hours[index]), work_done: total_done[index] > 0 ? Integer(total_done[index]) : 0)]
         end
       end
 
       velocity = []
 
       @range[:keys].size.times do |index|
-        velocity << [total_velocities[index], l(:charts_burndown2_hint_velocity, { :remaining_hours => RedmineCharts::Utils.round(total_velocities[index])})]
+        velocity << [total_velocities[index], l(:charts_burndown2_hint_velocity,  remaining_hours: RedmineCharts::Utils.round(total_velocities[index]))]
       end
 
-      velocity[velocity.size-1] = [0, l(:charts_burndown2_hint_velocity, { :remaining_hours => 0.0})]
+      velocity[velocity.size - 1] = [0, l(:charts_burndown2_hint_velocity,  remaining_hours: 0.0)]
 
       sets = [
         [l(:charts_burndown2_group_velocity), velocity],
@@ -48,13 +47,12 @@ class ChartsBurndown2Controller < ChartsController
       ]
 
       {
-        :labels => @range[:labels],
-        :count => @range[:keys].size,
-        :max => max > 0 ? max : 1,
-        :sets => sets
+        labels: @range[:labels],
+        count: @range[:keys].size,
+        max: max > 0 ? max : 1,
+        sets: sets
       }
     end
-
   end
 
   def get_data_for_burndown_chart
@@ -66,14 +64,14 @@ class ChartsBurndown2Controller < ChartsController
       conditions[column_name] = v if v and column_name
     end
 
-    issues = Issue.all(:conditions => conditions)
+    issues = Issue.all(conditions: conditions)
 
     # remove parent issues
     issues_children = []
     issues.each do |issue|
       issues_children << issue.parent_id if RedmineCharts.has_sub_issues_functionality_active and issue.parent_id
     end
-    issues.delete_if {|issue| issues_children.include?(issue.id)}
+    issues.delete_if { |issue| issues_children.include?(issue.id) }
 
     rows, @range = ChartTimeEntry.get_timeline(:issue_id, @conditions, @range)
 
@@ -133,20 +131,20 @@ class ChartsBurndown2Controller < ChartsController
 
     rows.each do |row|
       index = @range[:keys].index(row.range_value.to_s)
-      (0..(index-1)).each do |i|
+      (0..(index - 1)).each do |i|
         logged_hours_per_issue[row.group_id.to_i][i] -= row.logged_hours.to_f if logged_hours_per_issue[row.group_id.to_i]
       end
     end
 
-    @range[:keys].each_with_index do |key,index|
+    @range[:keys].each_with_index do |_key, index|
       estimated_count = 0
       issues.each do |issue|
         logged = logged_hours_per_issue[issue.id] ? logged_hours_per_issue[issue.id][index] : 0
         done_ratio = done_ratios_per_issue[issue.id] ? done_ratios_per_issue[issue.id][index] : 0
-        estimated = (done_ratio > 0 and logged > 0) ? (logged/done_ratio*100) : (estimated_hours_per_issue[issue.id] ? estimated_hours_per_issue[issue.id][index] : 0)
+        estimated = (done_ratio > 0 and logged > 0) ? (logged / done_ratio * 100) : (estimated_hours_per_issue[issue.id] ? estimated_hours_per_issue[issue.id][index] : 0)
         velocity = velocities_per_issue[issue.id] ? velocities_per_issue[issue.id][index] : 0
 
-        total_remaining_hours[index] += estimated * (100-done_ratio) / 100
+        total_remaining_hours[index] += estimated * (100 - done_ratio) / 100
 
         total_logged_hours[index] += logged
         total_estimated_hours[index] += estimated
@@ -205,7 +203,7 @@ class ChartsBurndown2Controller < ChartsController
   private
 
   def get_current_fixed_version_in(project)
-    version = Version.all(:conditions => {:project_id => project.id}).detect do |version|
+    version = Version.all(conditions: { project_id: project.id }).find do |version|
       version.created_on.to_date <= Date.current && !version.effective_date.nil? && version.effective_date >= Date.current
     end
     if version
@@ -219,5 +217,4 @@ class ChartsBurndown2Controller < ChartsController
       end
     end
   end
-
 end

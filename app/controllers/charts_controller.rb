@@ -1,15 +1,14 @@
 class ChartsController < ApplicationController
-
   unloadable
 
   menu_item :charts
 
   before_filter :find_project
 
-  before_filter :authorize, :only => [:index]
+  before_filter :authorize, only: [:index]
 
   def controller_name
-    "charts"
+    'charts'
   end
 
   # Show main page with conditions form and chart
@@ -36,16 +35,16 @@ class ChartsController < ApplicationController
 
     unless get_conditions_options.empty?
       @conditions_options     = RedmineCharts::ConditionsUtils.to_options(@project, get_conditions_options)
-      @textconditions_options = @conditions_options.select { |c1,c2| c2.nil? }.to_a
-      @conditions_options     = @conditions_options.select { |c1,c2| not c2.nil? }.to_a
+      @textconditions_options = @conditions_options.select { |_c1, c2| c2.nil? }.to_a
+      @conditions_options     = @conditions_options.select { |_c1, c2| not c2.nil? }.to_a
     else
       @conditions_options = []
     end
 
     unless get_multiconditions_options.empty?
       @multiconditions_options = RedmineCharts::ConditionsUtils.to_options(@project, get_multiconditions_options)
-      @textconditions_options  = @multiconditions_options.select { |c1,c2| c2.nil? }.to_a
-      @multiconditions_options = @multiconditions_options.select { |c1,c2| not c2.nil? }.to_a
+      @textconditions_options  = @multiconditions_options.select { |_c1, c2| c2.nil? }.to_a
+      @multiconditions_options = @multiconditions_options.select { |_c1, c2| not c2.nil? }.to_a
     else
       @multiconditions_options = []
     end
@@ -71,22 +70,22 @@ class ChartsController < ApplicationController
     end
 
     unless @saved_condition
-      @saved_condition = ChartSavedCondition.first(:conditions => {:id => params[:saved_condition_id]}) if not params[:saved_condition_id].blank?
+      @saved_condition = ChartSavedCondition.first(conditions: { id: params[:saved_condition_id] }) unless params[:saved_condition_id].blank?
     end
 
-    @saved_conditions = ChartSavedCondition.all(:conditions => ["project_id is null or project_id = ?", @project.id])
+    @saved_conditions = ChartSavedCondition.all(conditions: ['project_id is null or project_id = ?', @project.id])
 
     create_chart
 
-    if @error and not flash[:error]
+    if @error && !flash[:error]
       flash.now[:error] = l(@error)
     end
 
-    render :template => "charts/index"
+    render template: 'charts/index'
   end
 
   def destroy_saved_condition
-    condition = ChartSavedCondition.first(:conditions => {:id => params[:id]})
+    condition = ChartSavedCondition.first(conditions: { id: params[:id] })
 
     unless condition
       flash.now[:error] = l(:charts_saved_condition_flash_not_found)
@@ -95,7 +94,7 @@ class ChartsController < ApplicationController
       flash[:notice] = l(:charts_saved_condition_flash_deleted)
     end
 
-    redirect_to :action => :index
+    redirect_to action: :index
   end
 
   protected
@@ -114,26 +113,26 @@ class ChartsController < ApplicationController
 
       if get_y_legend
         y = YAxis.new
-        y.set_range(0,(data[:max]*1.2).round,(data[:max]/get_y_axis_labels).round) if data[:max]
+        y.set_range(0, (data[:max] * 1.2).round, (data[:max] / get_y_axis_labels).round) if data[:max]
         chart.y_axis = y
       end
 
       if get_x_legend
         x = XAxis.new
-        x.set_range(0,data[:count] > 1 ? data[:count] - 1 : 1,1) if data[:count]
+        x.set_range(0, data[:count] > 1 ? data[:count] - 1 : 1, 1) if data[:count]
         if data[:labels]
           labels = []
           if get_x_axis_labels > 0
-            step = (data[:labels].size/get_x_axis_labels).to_i
+            step = (data[:labels].size / get_x_axis_labels).to_i
             step = 1 if step == 0
           else
             step = 1
           end
-          data[:labels].each_with_index do |l,i|
+          data[:labels].each_with_index do |l, i|
             if i % step == 0
               labels << l
             else
-              labels << ""
+              labels << ''
             end
           end
           x.set_labels(labels)
@@ -141,7 +140,7 @@ class ChartsController < ApplicationController
         chart.x_axis = x
       else
         x = XAxis.new
-        x.set_labels([""])
+        x.set_labels([''])
         chart.x_axis = x
       end
 
@@ -157,7 +156,7 @@ class ChartsController < ApplicationController
         chart.set_y_legend(legend)
       end
 
-      chart.set_bg_colour('#ffffff');
+      chart.set_bg_colour('#ffffff')
 
       @data = chart.to_s
     end
@@ -184,11 +183,11 @@ class ChartsController < ApplicationController
 
   # Returns data for chart
   def get_data
-    raise "overwrite it"
+    fail 'overwrite it'
   end
 
   # Returns hints for given record and grouping type
-  def get_hints(record)
+  def get_hints(_record)
     nil
   end
 
@@ -255,7 +254,7 @@ class ChartsController < ApplicationController
     if action == :create
       condition = ChartSavedCondition.new
     else
-      condition = ChartSavedCondition.first(:conditions => {:id => params[:saved_condition_id]})
+      condition = ChartSavedCondition.first(conditions: { id: params[:saved_condition_id] })
     end
 
     unless condition
@@ -263,7 +262,7 @@ class ChartsController < ApplicationController
     else
       condition.name = params["saved_condition_#{action}_name".to_sym]
       condition.project_id = params["saved_condition_#{action}_project_id".to_sym]
-      condition.chart = self.class.name.underscore.sub("charts_","").sub("_controller","")
+      condition.chart = self.class.name.underscore.sub('charts_', '').sub('_controller', '')
 
       conditions[:grouping] = grouping
 
@@ -279,7 +278,7 @@ class ChartsController < ApplicationController
           elsif condition.errors[:name] == 'has already been taken'
             flash.now[:error] = l(:charts_saved_condition_flash_name_exists)
           else
-            flash.now[:error] = condition.errors.full_messages.join("<br/>")
+            flash.now[:error] = condition.errors.full_messages.join('<br/>')
           end
         end
 
@@ -287,5 +286,4 @@ class ChartsController < ApplicationController
       end
     end
   end
-
 end

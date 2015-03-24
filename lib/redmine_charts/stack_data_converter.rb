@@ -1,11 +1,10 @@
 module RedmineCharts
   module StackDataConverter
-
     include Redmine::I18n
 
     def self.convert(chart, data)
       tooltip = OpenFlashChart::Tooltip.new
-      tooltip.set_hover()
+      tooltip.set_hover
 
       chart.set_tooltip(tooltip)
 
@@ -15,21 +14,21 @@ module RedmineCharts
       keys = []
       values = []
 
-      data[:sets].each_with_index do |set,i|
-        set[1].each_with_index do |v,j|
+      data[:sets].each_with_index do |set, i|
+        set[1].each_with_index do |v, j|
           values[j] ||= []
           values[j][i] = if v.is_a? Array
-            d = OpenFlashChart::BarStackValue.new(v[0], RedmineCharts::Utils.color(i))
-            d.set_tooltip(v[1]) unless v[1].nil?
-            d
+                           d = OpenFlashChart::BarStackValue.new(v[0], RedmineCharts::Utils.color(i))
+                           d.set_tooltip(v[1]) unless v[1].nil?
+                           d
           else
             v
           end
         end
-        keys << {:colour => RedmineCharts::Utils.color(i), :text => set[0], :"font-size" => 10}
+        keys << { :colour => RedmineCharts::Utils.color(i), :text => set[0], :"font-size" => 10 }
       end
 
-      keys << {:colour => '#000000', :text => l(:charts_deviation_group_estimated), :"font-size" => 10}
+      keys << { :colour => '#000000', :text => l(:charts_deviation_group_estimated), :"font-size" => 10 }
 
       bar.values = values
       bar.set_keys(keys)
@@ -47,18 +46,16 @@ module RedmineCharts
         chart.add_element(shape)
       end
     end
-
   end
 end
 
 # Fixes error with BarStackValue is OpenFlashChart ruby library
 module OpenFlashChart
   class BarStackValue < Base
-    def initialize(val,colour, args={})
+    def initialize(val, colour, args = {})
       @val    = val
       @colour = colour
       super args
     end
   end
 end
-

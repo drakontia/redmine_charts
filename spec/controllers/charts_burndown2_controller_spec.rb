@@ -5,15 +5,15 @@ describe ChartsBurndown2Controller do
   include Redmine::I18n
 
   before do
-    Time.set_current_date = Time.mktime(2010,4,16)
+    Time.set_current_date = Time.mktime(2010, 4, 16)
     @controller = ChartsBurndown2Controller.new
     @request    = ActionController::TestRequest.new
     @request.session[:user_id] = 1
     Setting.default_language = 'en'
   end
 
-  it "should return data with grouping by fixed version" do
-    get :index, :project_id => 15041, :fixed_version_ids => [15042]
+  it 'should return data with grouping by fixed version' do
+    get :index, project_id: 15_041, fixed_version_ids: [15_042]
     expect(response).to be_success
 
     body = ActiveSupport::JSON.decode(assigns[:data])
@@ -34,31 +34,31 @@ describe ChartsBurndown2Controller do
     expect(body['elements'][1]['text']).to eq(l(:charts_burndown2_group_burndown))
 
     expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(20)
-    expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown2_hint_velocity, :remaining_hours => 20.0)}<br>#{'20 Mar 10'}")
+    expect(body['elements'][0]['values'][0]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown2_hint_velocity, remaining_hours: 20.0)}<br>#{'20 Mar 10'}")
     expect(body['elements'][0]['values'][20]['value']).to be_within(0.1).of(10.7)
-    expect(body['elements'][0]['values'][20]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown2_hint_velocity, :remaining_hours => 10.7)}<br>#{'09 Apr 10'}")
+    expect(body['elements'][0]['values'][20]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown2_hint_velocity, remaining_hours: 10.7)}<br>#{'09 Apr 10'}")
     expect(body['elements'][0]['values'][42]['value']).to be_within(0.1).of(0)
-    expect(body['elements'][0]['values'][42]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown2_hint_velocity, :remaining_hours => 0.0)}<br>#{'01 May 10'}")
+    expect(body['elements'][0]['values'][42]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown2_hint_velocity, remaining_hours: 0.0)}<br>#{'01 May 10'}")
 
     expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(11.0)
-    expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown_hint_remaining, :remaining_hours => 11.0, :work_done => 60)}<br>#{'20 Mar 10'}")
+    expect(body['elements'][1]['values'][0]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown_hint_remaining, remaining_hours: 11.0, work_done: 60)}<br>#{'20 Mar 10'}")
     expect(body['elements'][1]['values'][27]['value']).to be_within(0.1).of(11.0)
-    expect(body['elements'][1]['values'][27]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown_hint_remaining, :remaining_hours => 11.0, :work_done => 60)}<br>#{'16 Apr 10'}")
+    expect(body['elements'][1]['values'][27]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown_hint_remaining, remaining_hours: 11.0, work_done: 60)}<br>#{'16 Apr 10'}")
     expect(body['elements'][1]['values'][28]).to be_nil
 
   end
 
-  it "should return data if it has sub tasks" do
+  it 'should return data if it has sub tasks' do
     if RedmineCharts.has_sub_issues_functionality_active
-      get :index, :project_id => 15044, :fixed_version_ids => [15043]
+      get :index, project_id: 15_044, fixed_version_ids: [15_043]
       expect(response).to be_success
 
       body = ActiveSupport::JSON.decode(assigns[:data])
       expect(body['elements'][0]['values'][0]['value']).to be_within(0.1).of(12)
-      expect(body['elements'][0]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown2_hint_velocity, :remaining_hours => 12.0)}<br>#{'20 Mar 10'}")
+      expect(body['elements'][0]['values'][0]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown2_hint_velocity, remaining_hours: 12.0)}<br>#{'20 Mar 10'}")
 
       expect(body['elements'][1]['values'][0]['value']).to be_within(0.1).of(12.0)
-      expect(body['elements'][1]['values'][0]['tip'].gsub("\\u003C", "<").gsub("\\u003E", ">").gsub("\000", "")).to eq("#{l(:charts_burndown_hint_remaining, :remaining_hours => 12.0, :work_done => 0)}<br>#{'20 Mar 10'}")
+      expect(body['elements'][1]['values'][0]['tip'].gsub('\\u003C', '<').gsub('\\u003E', '>').gsub("\000", '')).to eq("#{l(:charts_burndown_hint_remaining, remaining_hours: 12.0, work_done: 0)}<br>#{'20 Mar 10'}")
     end
   end
 

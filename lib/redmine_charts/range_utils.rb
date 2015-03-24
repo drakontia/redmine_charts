@@ -1,27 +1,26 @@
 module RedmineCharts
   module RangeUtils
-
     include Redmine::I18n
 
-    @@types = [ :months, :weeks, :days ]
+    @@types = [:months, :weeks, :days]
     @@days_per_year = 366
     @@weeks_per_year = 53
     @@months_per_year = 12
-    @@seconds_per_day = 86400
+    @@seconds_per_day = 86_400
 
     def self.types
       @@types
     end
 
     def self.options
-      @@types.collect do |type|
+      @@types.map do |type|
         [l("charts_show_last_#{type}".to_sym), type]
 
       end
     end
 
     def self.default_range
-      { :range => :weeks, :limit => 20, :offset => 0 }
+      { range: :weeks, limit: 20, offset: 0 }
     end
 
     def self.from_params(params)
@@ -37,7 +36,7 @@ module RedmineCharts
     end
 
     def self.propose_range_for_two_dates(start_date, end_date)
-      { :range => :days, :offset => (Date.today - end_date).to_i, :limit => (end_date - start_date).to_i + 1 }
+      { range: :days, offset: (Date.today - end_date).to_i, limit: (end_date - start_date).to_i + 1 }
     end
 
     def self.propose_range(start_date)
@@ -52,7 +51,7 @@ module RedmineCharts
 
       diff = 10 if diff < 10
 
-      { :range => type, :offset => 0, :limit => diff + 1}
+      { range: type, offset: 0, limit: diff + 1 }
     end
 
     def self.prepare_range(range)
@@ -145,15 +144,15 @@ module RedmineCharts
     end
 
     def self.date_from_week(year_and_week_of_year)
-      Date.strptime(year_and_week_of_year, "%Y0%W")
+      Date.strptime(year_and_week_of_year, '%Y0%W')
     end
 
     def self.date_from_month(year_and_month)
-      Date.strptime(year_and_month, "%Y0%m")
+      Date.strptime(year_and_month, '%Y0%m')
     end
 
     def self.date_from_day(year_and_day_of_year)
-      Date.strptime(year_and_day_of_year, "%Y%j")
+      Date.strptime(year_and_day_of_year, '%Y%j')
     end
 
     def self.date_from_unit(date_string, unit)
@@ -175,29 +174,29 @@ module RedmineCharts
 
     def self.subtract_month(current, offset)
       date = date_from_month(current) - offset.months
-      [date.strftime("%Y0%m"), date.strftime("%b %y")]
+      [date.strftime('%Y0%m'), date.strftime('%b %y')]
     end
 
     def self.subtract_week(current, offset)
       begin
-        date = Date.strptime(current, "%Y0%W") - offset.weeks
+        date = Date.strptime(current, '%Y0%W') - offset.weeks
       rescue
-        date = Date.strptime(current[0..3]+"001", "%Y0%W") - 7 - offset.weeks
+        date = Date.strptime(current[0..3] + '001', '%Y0%W') - 7 - offset.weeks
       end
 
-      key = "%d%03d" % [date.year, date.strftime("%W").to_i]
+      key = '%d%03d' % [date.year, date.strftime('%W').to_i]
 
-      date -= ((date.strftime("%w").to_i + 6) % 7).days
+      date -= ((date.strftime('%w').to_i + 6) % 7).days
 
-      day_from = date.strftime("%d").to_i
-      month_from = date.strftime("%b")
-      year_from = date.strftime("%y")
+      day_from = date.strftime('%d').to_i
+      month_from = date.strftime('%b')
+      year_from = date.strftime('%y')
 
       date += 6.days
 
-      day_to = date.strftime("%d").to_i
-      month_to = date.strftime("%b")
-      year_to = date.strftime("%y")
+      day_to = date.strftime('%d').to_i
+      month_to = date.strftime('%b')
+      year_to = date.strftime('%y')
 
       if year_from != year_to
         label = "#{day_from} #{month_from} #{year_from} - #{day_to} #{month_to} #{year_to}"
@@ -211,12 +210,11 @@ module RedmineCharts
     end
 
     def self.subtract_day(current, offset)
-      date = Date.strptime(current, "%Y%j") - offset
+      date = Date.strptime(current, '%Y%j') - offset
 
-      key = "%d%03d" % [date.year, date.yday]
+      key = '%d%03d' % [date.year, date.yday]
 
-      [key, date.strftime("%d %b %y")]
+      [key, date.strftime('%d %b %y')]
     end
-
   end
 end

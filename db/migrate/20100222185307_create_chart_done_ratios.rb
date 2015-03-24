@@ -1,12 +1,12 @@
 class CreateChartDoneRatios < ActiveRecord::Migration
   def self.up
     create_table :chart_done_ratios do |t|
-      t.integer :day, :null => false
-      t.integer :week, :null => false
-      t.integer :month, :null => false
-      t.integer :project_id, :null => false
-      t.integer :issue_id, :null => false
-      t.integer :done_ratio, :null => false
+      t.integer :day, null: false
+      t.integer :week, null: false
+      t.integer :month, null: false
+      t.integer :project_id, null: false
+      t.integer :issue_id, null: false
+      t.integer :done_ratio, null: false
     end
     add_index :chart_done_ratios, :day
     add_index :chart_done_ratios, :week

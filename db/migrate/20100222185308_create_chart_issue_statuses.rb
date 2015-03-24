@@ -1,12 +1,12 @@
 class CreateChartIssueStatuses < ActiveRecord::Migration
   def self.up
     create_table :chart_issue_statuses do |t|
-      t.integer :day, :null => false
-      t.integer :week, :null => false
-      t.integer :month, :null => false
-      t.integer :project_id, :null => false
-      t.integer :issue_id, :null => false
-      t.integer :status_id, :null => false
+      t.integer :day, null: false
+      t.integer :week, null: false
+      t.integer :month, null: false
+      t.integer :project_id, null: false
+      t.integer :issue_id, null: false
+      t.integer :status_id, null: false
     end
     add_index :chart_issue_statuses, :day
     add_index :chart_issue_statuses, :week

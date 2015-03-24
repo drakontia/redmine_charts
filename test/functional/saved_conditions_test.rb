@@ -3,27 +3,20 @@ require File.dirname(__FILE__) + '/charts_controller_test'
 require 'charts_ratio_controller'
 
 class ChartsRatioController
-
   def rescue_action(e)
-    raise e
+    fail e
   end
 
   def authorize
     true
   end
 
-  def saved_conditions
-    @saved_conditions
-  end
+  attr_reader :saved_conditions
 
-  def saved_condition
-    @saved_condition
-  end
-
+  attr_reader :saved_condition
 end
 
 class SavedConditionsTest < ActionController::TestCase
-
   include Redmine::I18n
 
   def setup
@@ -36,11 +29,11 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_return_saved_conditions
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(:name => "Test", :chart => "ratio", :project_id => 15041)
-    c.conditions = {:a => "b"}
+    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_041)
+    c.conditions = { a: 'b' }
     c.save
 
-    get :index, {:project_id => 15041}
+    get :index, project_id: 15_041
     assert_response :success
 
     assert_equal 1, @controller.saved_conditions.size
@@ -49,11 +42,11 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_return_saved_conditions_for_all_projects
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(:name => "Test", :chart => "ratio", :project_id => nil)
-    c.conditions = {:a => "b"}
+    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: nil)
+    c.conditions = { a: 'b' }
     c.save
 
-    get :index, {:project_id => 15041}
+    get :index, project_id: 15_041
     assert_response :success
 
     assert_equal 1, @controller.saved_conditions.size
@@ -62,11 +55,11 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_not_return_saved_conditions_for_other_project
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(:name => "Test", :chart => "ratio", :project_id => 15042)
-    c.conditions = {:a => "b"}
+    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_042)
+    c.conditions = { a: 'b' }
     c.save
 
-    get :index, {:project_id => 15041}
+    get :index, project_id: 15_041
     assert_response :success
 
     assert_equal 0, @controller.saved_conditions.size
@@ -75,13 +68,13 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_destroy_saved_condition
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(:name => "Test", :chart => "ratio", :project_id => 15041)
-    c.conditions = {:a => "b"}
+    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_041)
+    c.conditions = { a: 'b' }
     c.save
 
     assert_equal 1, ChartSavedCondition.all.size
 
-    get :destroy_saved_condition, {:project_id => 15041, :id => c.id }
+    get :destroy_saved_condition, project_id: 15_041, id: c.id
     assert_response :redirect
 
     assert_equal 0, ChartSavedCondition.all.size
@@ -92,7 +85,7 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_return_error_when_try_destroy_not_existed_saved_conditions
     ChartSavedCondition.destroy_all
 
-    get :destroy_saved_condition, {:project_id => 15041, :id => 1 }
+    get :destroy_saved_condition, project_id: 15_041, id: 1
     assert_response :redirect
 
     assert_equal l(:charts_saved_condition_flash_not_found), flash[:error]
@@ -101,28 +94,28 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_create_saved_conditions
     ChartSavedCondition.destroy_all
 
-    get :index, {:project_id => 15041, :chart_form_action => 'saved_condition_create', :saved_condition_create_name => "Test", :saved_condition_create_project_id => 15041, :project_ids => [15041], :grouping => :activity_id, :priority_ids => [5, 6] }
+    get :index, project_id: 15_041, chart_form_action: 'saved_condition_create', saved_condition_create_name: 'Test', saved_condition_create_project_id: 15_041, project_ids: [15_041], grouping: :activity_id, priority_ids: [5, 6]
     assert_response :success
 
     condition = ChartSavedCondition.first
 
     assert_not_nil condition
-    assert_equal "Test", condition.name
-    assert_equal "ratio", condition.chart
-    assert_equal 15041, condition.project_id
-    conditions = condition.conditions.split("&")
+    assert_equal 'Test', condition.name
+    assert_equal 'ratio', condition.chart
+    assert_equal 15_041, condition.project_id
+    conditions = condition.conditions.split('&')
     assert_equal 4, conditions.size
-    assert conditions.include?("grouping=activity_id")
-    assert conditions.include?("priority_ids[]=5")
-    assert conditions.include?("priority_ids[]=6")
-    assert conditions.include?("project_ids[]=15041")
+    assert conditions.include?('grouping=activity_id')
+    assert conditions.include?('priority_ids[]=5')
+    assert conditions.include?('priority_ids[]=6')
+    assert conditions.include?('project_ids[]=15041')
     assert_equal l(:charts_saved_condition_flash_created), flash[:notice]
   end
 
   def test_if_return_error_for_blank_name
     ChartSavedCondition.destroy_all
 
-    get :index, {:project_id => 15041, :chart_form_action => 'saved_condition_create', :saved_condition_create_name => "", :saved_condition_create_project_id => 15041 }
+    get :index, project_id: 15_041, chart_form_action: 'saved_condition_create', saved_condition_create_name: '', saved_condition_create_project_id: 15_041
     assert_response :success
 
     assert_equal l(:charts_saved_condition_flash_name_cannot_be_blank), flash[:error]
@@ -131,11 +124,11 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_return_error_for_duplicated_name
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(:name => "Test", :chart => "ratio", :project_id => 15041)
-    c.conditions = {:a => "b"}
+    c = ChartSavedCondition.new(name: 'Test', chart: 'ratio', project_id: 15_041)
+    c.conditions = { a: 'b' }
     c.save
 
-    get :index, {:project_id => 15041, :chart_form_action => 'saved_condition_create', :saved_condition_create_name => "Test", :saved_condition_create_project_id => 15041 }
+    get :index, project_id: 15_041, chart_form_action: 'saved_condition_create', saved_condition_create_name: 'Test', saved_condition_create_project_id: 15_041
     assert_response :success
 
     assert_equal l(:charts_saved_condition_flash_name_exists), flash[:error]
@@ -144,28 +137,27 @@ class SavedConditionsTest < ActionController::TestCase
   def test_if_update_saved_conditions
     ChartSavedCondition.destroy_all
 
-    c = ChartSavedCondition.new(:name => "Old test", :chart => "old_ratio", :project_id => 15041)
-    c.conditions = {:a => "b"}
+    c = ChartSavedCondition.new(name: 'Old test', chart: 'old_ratio', project_id: 15_041)
+    c.conditions = { a: 'b' }
     c.save
 
-    get :index, {:project_id => 15041, :chart_form_action => 'saved_condition_update', :saved_condition_update_name => "Test", :saved_condition_update_project_id => nil, :saved_condition_id => c.id, :project_ids => [15041], :grouping => :activity_id, :priority_ids => [5, 6] }
+    get :index, project_id: 15_041, chart_form_action: 'saved_condition_update', saved_condition_update_name: 'Test', saved_condition_update_project_id: nil, saved_condition_id: c.id, project_ids: [15_041], grouping: :activity_id, priority_ids: [5, 6]
     assert_response :success
 
     condition = ChartSavedCondition.first
 
     assert_not_nil condition
-    assert_equal "Test", condition.name
-    assert_equal "ratio", condition.chart
+    assert_equal 'Test', condition.name
+    assert_equal 'ratio', condition.chart
     assert_nil condition.project_id
 
-    conditions = condition.conditions.split("&")
+    conditions = condition.conditions.split('&')
     assert_equal 4, conditions.size
-    assert conditions.include?("grouping=activity_id")
-    assert conditions.include?("priority_ids[]=5")
-    assert conditions.include?("priority_ids[]=6")
-    assert conditions.include?("project_ids[]=15041")
+    assert conditions.include?('grouping=activity_id')
+    assert conditions.include?('priority_ids[]=5')
+    assert conditions.include?('priority_ids[]=6')
+    assert conditions.include?('project_ids[]=15041')
 
     assert_equal l(:charts_saved_condition_flash_updated), flash[:notice]
   end
-
 end

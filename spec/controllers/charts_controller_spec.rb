@@ -1,9 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 class ChartsController
-
   def rescue_action(e)
-    raise e
+    fail e
   end
 
   def authorize
@@ -13,7 +12,6 @@ class ChartsController
   def get_data_value
     @data
   end
-
 end
 
 describe ChartsController do
@@ -22,7 +20,7 @@ describe ChartsController do
 
   protected
 
-  def get_data options = {}
+  def get_data(options = {})
     get :index, options
     expect(response).to be_success
     ActiveSupport::JSON.decode(@controller.get_data_value) if @controller.get_data_value

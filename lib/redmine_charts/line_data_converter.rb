@@ -1,6 +1,5 @@
 module RedmineCharts
   module LineDataConverter
-
     include Redmine::I18n
 
     def self.convert(chart, data)
@@ -15,7 +14,7 @@ module RedmineCharts
 
         j = -1
 
-        vals = set[1].collect do |v|
+        vals = set[1].map do |v|
           j += 1
           if v.is_a? Array
             d = OpenFlashChart::Base.new
@@ -37,6 +36,5 @@ module RedmineCharts
         index += 1
       end
     end
-
   end
 end

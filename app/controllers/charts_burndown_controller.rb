@@ -1,5 +1,4 @@
 class ChartsBurndownController < ChartsController
-
   unloadable
 
   protected
@@ -13,16 +12,16 @@ class ChartsBurndownController < ChartsController
     remaining = []
     predicted = []
 
-    @range[:keys].each_with_index do |key,index|
+    @range[:keys].each_with_index do |_key, index|
       max = total_predicted_hours[index] if max < total_predicted_hours[index]
       max = total_estimated_hours[index] if max < total_estimated_hours[index]
-      estimated << [total_estimated_hours[index], l(:charts_burndown_hint_estimated, { :estimated_hours => RedmineCharts::Utils.round(total_estimated_hours[index]) })]
-      logged  << [total_logged_hours[index], l(:charts_burndown_hint_logged, { :logged_hours => RedmineCharts::Utils.round(total_logged_hours[index]) })]
-      remaining << [total_remaining_hours[index], l(:charts_burndown_hint_remaining, { :remaining_hours => RedmineCharts::Utils.round(total_remaining_hours[index]), :work_done => total_done[index] > 0 ? Integer(total_done[index]) : 0 })]
+      estimated << [total_estimated_hours[index], l(:charts_burndown_hint_estimated,  estimated_hours: RedmineCharts::Utils.round(total_estimated_hours[index]))]
+      logged  << [total_logged_hours[index], l(:charts_burndown_hint_logged,  logged_hours: RedmineCharts::Utils.round(total_logged_hours[index]))]
+      remaining << [total_remaining_hours[index], l(:charts_burndown_hint_remaining,  remaining_hours: RedmineCharts::Utils.round(total_remaining_hours[index]), work_done: total_done[index] > 0 ? Integer(total_done[index]) : 0)]
       if total_predicted_hours[index] > total_estimated_hours[index]
-        predicted << [total_predicted_hours[index], l(:charts_burndown_hint_predicted_over_estimation, { :predicted_hours => RedmineCharts::Utils.round(total_predicted_hours[index]), :hours_over_estimation => RedmineCharts::Utils.round(total_predicted_hours[index] - total_estimated_hours[index]) }), true]
+        predicted << [total_predicted_hours[index], l(:charts_burndown_hint_predicted_over_estimation,  predicted_hours: RedmineCharts::Utils.round(total_predicted_hours[index]), hours_over_estimation: RedmineCharts::Utils.round(total_predicted_hours[index] - total_estimated_hours[index])), true]
       else
-        predicted << [total_predicted_hours[index], l(:charts_burndown_hint_predicted, { :predicted_hours => RedmineCharts::Utils.round(total_predicted_hours[index]) })]
+        predicted << [total_predicted_hours[index], l(:charts_burndown_hint_predicted,  predicted_hours: RedmineCharts::Utils.round(total_predicted_hours[index]))]
       end
     end
 
@@ -34,10 +33,10 @@ class ChartsBurndownController < ChartsController
     ]
 
     {
-      :labels => @range[:labels],
-      :count => @range[:keys].size,
-      :max => max > 1 ? max : 1,
-      :sets => sets
+      labels: @range[:labels],
+      count: @range[:keys].size,
+      max: max > 1 ? max : 1,
+      sets: sets
     }
   end
 
@@ -46,11 +45,11 @@ class ChartsBurndownController < ChartsController
 
     @conditions.each do |c, v|
       column_name = RedmineCharts::ConditionsUtils.to_column(c, 'issues')
-      column_name = 'issues.id' if column_name == 'issues.issue_id' 
+      column_name = 'issues.id' if column_name == 'issues.issue_id'
       conditions[column_name] = v if v and column_name
     end
 
-    issues = Issue.all(:conditions => conditions)
+    issues = Issue.all(conditions: conditions)
 
     rows, @range = ChartTimeEntry.get_timeline(:issue_id, @conditions, @range)
 
@@ -98,18 +97,18 @@ class ChartsBurndownController < ChartsController
 
     rows.each do |row|
       index = @range[:keys].index(row.range_value.to_s)
-      (0..(index-1)).each do |i|
+      (0..(index - 1)).each do |i|
         logged_hours_per_issue[row.group_id.to_i][i] -= row.logged_hours.to_f if logged_hours_per_issue[row.group_id.to_i]
       end
     end
 
-    @range[:keys].each_with_index do |key,index|
+    @range[:keys].each_with_index do |_key, index|
       issues.each do |issue|
         logged = logged_hours_per_issue[issue.id] ? logged_hours_per_issue[issue.id][index] : 0
         estimated = estimated_hours_per_issue[issue.id] ? estimated_hours_per_issue[issue.id][index] : 0
         done_ratio = done_ratios_per_issue[issue.id] ? done_ratios_per_issue[issue.id][index] : 0
 
-        total_remaining_hours[index] += ((done_ratio > 0 and logged > 0) ? (logged/done_ratio) : (estimated/100)) * (100-done_ratio)
+        total_remaining_hours[index] += ((done_ratio > 0 and logged > 0) ? (logged / done_ratio) : (estimated / 100)) * (100 - done_ratio)
 
         total_logged_hours[index] += logged
         total_estimated_hours[index] += estimated
@@ -159,5 +158,4 @@ class ChartsBurndownController < ChartsController
   def get_multiconditions_options
     (RedmineCharts::ConditionsUtils.types - [:activity_ids, :user_ids]).flatten
   end
-
 end

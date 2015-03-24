@@ -1,9 +1,8 @@
 module RedmineCharts
   module GroupingUtils
-
     include Redmine::I18n
 
-    @@types = [ :user_id, :issue_id, :activity_id, :category_id, :tracker_id, :fixed_version_id, :priority_id, :author_id, :status_id, :project_id, :assigned_to_id ]
+    @@types = [:user_id, :issue_id, :activity_id, :category_id, :tracker_id, :fixed_version_id, :priority_id, :author_id, :status_id, :project_id, :assigned_to_id]
 
     def self.types
       @@types
@@ -13,12 +12,12 @@ module RedmineCharts
       if params[:grouping].blank? or not types.include?(params[:grouping].to_sym)
         nil
       else
-         params[:grouping].to_sym
+        params[:grouping].to_sym
       end
     end
 
     def self.to_options(options)
-      options.collect { |i| [l("charts_group_by_#{i}".to_sym), i]  }
+      options.map { |i| [l("charts_group_by_#{i}".to_sym), i]  }
     end
 
     def self.to_string(id, grouping, default = nil)
@@ -60,18 +59,17 @@ module RedmineCharts
     def self.to_column(symbol, table)
       case symbol
       when :user_id then "#{table}.user_id"
-      when :author_id then "issues.author_id"
-      when :assigned_to_id then "issues.assigned_to_id"
+      when :author_id then 'issues.author_id'
+      when :assigned_to_id then 'issues.assigned_to_id'
       when :issue_id then "#{table}.issue_id"
       when :activity_id then "#{table}.activity_id"
-      when :category_id then "issues.category_id"
-      when :priority_id then "issues.priority_id"
-      when :tracker_id then "issues.tracker_id"
-      when :fixed_version_id then "issues.fixed_version_id"
+      when :category_id then 'issues.category_id'
+      when :priority_id then 'issues.priority_id'
+      when :tracker_id then 'issues.tracker_id'
+      when :fixed_version_id then 'issues.fixed_version_id'
       when :project_id then "#{table}.project_id"
-      when :status_id then "issues.status_id"
+      when :status_id then 'issues.status_id'
       end
     end
-
   end
 end

@@ -1,15 +1,15 @@
 class CreateChartTimeEntries < ActiveRecord::Migration
   def self.up
     create_table :chart_time_entries do |t|
-      t.integer :day, :null => false
-      t.integer :week, :null => false
-      t.integer :month, :null => false
-      t.float :logged_hours, :null => false
-      t.integer :entries, :null => false
-      t.integer :user_id, :null => false
-      t.integer :issue_id, :null => true
-      t.integer :activity_id, :null => true
-      t.integer :project_id, :null => false
+      t.integer :day, null: false
+      t.integer :week, null: false
+      t.integer :month, null: false
+      t.float :logged_hours, null: false
+      t.integer :entries, null: false
+      t.integer :user_id, null: false
+      t.integer :issue_id, null: true
+      t.integer :activity_id, null: true
+      t.integer :project_id, null: false
     end
     add_index :chart_time_entries, :day
     add_index :chart_time_entries, :week
