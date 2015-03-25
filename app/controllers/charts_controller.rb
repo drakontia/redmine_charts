@@ -75,7 +75,7 @@ class ChartsController < ApplicationController
 
     @saved_conditions = ChartSavedCondition.all(conditions: ['project_id is null or project_id = ?', @project.id])
 
-    create_chart
+    @graph = ofc2_inline(650, 300, create_chart, 'chart')
 
     if @error && !flash[:error]
       flash.now[:error] = l(@error)
@@ -110,6 +110,10 @@ class ChartsController < ApplicationController
       @data = nil
     else
       get_converter.convert(chart, data)
+
+      data.each do |element|
+        chart << element
+      end
 
       if get_y_legend
         y = YAxis.new
@@ -158,7 +162,7 @@ class ChartsController < ApplicationController
 
       chart.set_bg_colour('#ffffff')
 
-      @data = chart.to_s
+      chart
     end
   end
 

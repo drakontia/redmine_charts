@@ -2,6 +2,24 @@ require 'redmine'
 
 require 'redmine_charts'
 
+def apply_patch(&block)
+ActionDispatch::Callbacks.to_prepare(&block)
+end
+
+apply_patch do
+
+  require_dependency 'issue'
+  require_dependency 'time_entry'
+
+  unless Issue.included_modules.include? RedmineCharts::IssuePatch
+    Issue.send(:include, RedmineCharts::IssuePatch)
+  end
+
+  unless TimeEntry.included_modules.include? RedmineCharts::TimeEntryPatch
+    TimeEntry.send(:include, RedmineCharts::TimeEntryPatch)
+  end
+end
+
 Redmine::Plugin.register :redmine_charts do
   name 'Redmine Charts'
   author 'Daisuke Miura'

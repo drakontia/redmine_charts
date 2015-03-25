@@ -1,4 +1,3 @@
-require 'open_flash_chart/base'
 require 'redmine/i18n'
 
 module RedmineCharts

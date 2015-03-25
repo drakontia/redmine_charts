@@ -1,25 +1,12 @@
-require 'redmine/i18n'
-
 module RedmineCharts
   module RangeUtils
-
-    include Redmine::I18n
-
-    @@types = [:months, :weeks, :days]
-    @@days_per_year = 366
-    @@weeks_per_year = 53
-    @@months_per_year = 12
-    @@seconds_per_day = 86_400
+    @days_per_year = 366
+    @weeks_per_year = 53
+    @months_per_year = 12
+    @seconds_per_day = 86_400
 
     def self.types
-      @@types
-    end
-
-    def self.options
-      @@types.map do |type|
-        [l("charts_show_last_#{type}".to_sym), type]
-
-      end
+      [:months, :weeks, :days]
     end
 
     def self.default_range
@@ -43,12 +30,12 @@ module RedmineCharts
     end
 
     def self.propose_range(start_date)
-      if (diff = diff(start_date[:day], current_day, @@days_per_year)) <= 20
+      if (diff = diff(start_date[:day], current_day, @days_per_year)) <= 20
         type = :days
-      elsif (diff = diff(start_date[:week], current_week, @@weeks_per_year)) <= 20
+      elsif (diff = diff(start_date[:week], current_week, @weeks_per_year)) <= 20
         type = :weeks
       else
-        (diff = diff(start_date[:month], current_month, @@months_per_year))
+        (diff = diff(start_date[:month], current_month, @months_per_year))
         type = :months
       end
 

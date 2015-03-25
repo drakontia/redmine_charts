@@ -42,7 +42,7 @@ module ChartsHelper
     res << l(:charts_show_last) << ' '
     res << text_field_tag(:limit, limit, size: 4)
     res << hidden_field_tag(:offset, offset) << ' '
-    res << select_tag(:range, options_for_select(RedmineCharts::RangeUtils.options, range.to_sym))
+    res << select_tag(:range, options_for_select(show_range_options, range.to_sym))
 
     res << '&nbsp; &nbsp;'
 
@@ -56,6 +56,13 @@ module ChartsHelper
       res << link_to_function(l(:charts_later), 'charts_later();')
     end
     res
+  end
+
+  def show_range_options
+    types = [:months, :weeks, :days]
+    types.map do |type|
+      [l("charts_show_last_#{type}".to_sym), type]
+    end
   end
 
   # Shows pages.
