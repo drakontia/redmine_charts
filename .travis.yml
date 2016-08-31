@@ -4,8 +4,7 @@ branches:
     - develop
 language: ruby
 rvm:
-  - 2.1.0
-  - 2.2.0
+  - 2.2.5
 env:
   - REDMINE_VER=2.6.0 DB=mysql
   - REDMINE_VER=2.6.0 DB=postgresql
